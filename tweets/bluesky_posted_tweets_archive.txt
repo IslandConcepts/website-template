@@ -1,0 +1,4 @@
+# Archive of all posted tweets for similarity detection
+# Format: [timestamp] tweet text
+# Separator: ---
+
