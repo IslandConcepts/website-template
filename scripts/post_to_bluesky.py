@@ -48,9 +48,34 @@ logger = logging.getLogger('bluesky_posting')
 # Ensure logs directory exists
 Path(os.path.join(os.path.dirname(__file__), '../logs')).mkdir(exist_ok=True)
 
-# Bluesky API credentials from environment variables with fallback
-BLUESKY_USERNAME = os.environ.get('BLUESKY_USERNAME', "signalleaks.bsky.social")
-BLUESKY_PASSWORD = os.environ.get('BLUESKY_PASSWORD', "((M00n))")
+# Try to get Bluesky credentials from config, then environment, with no hardcoded fallback
+try:
+    from config_loader import ConfigLoader
+    config = ConfigLoader()
+    BLUESKY_USERNAME = config.get_value("social.accounts.platform.username", "")
+    if not BLUESKY_USERNAME:
+        # Look specifically for the Bluesky platform entry
+        platforms = config.get_config("social").get("accounts", {}).get("platform", [])
+        if not isinstance(platforms, list):
+            platforms = [platforms]
+        
+        for platform in platforms:
+            if isinstance(platform, dict) and platform.get("n") == "BlueSky":
+                BLUESKY_USERNAME = platform.get("username", "")
+                BLUESKY_PASSWORD = platform.get("password", "")
+                break
+    
+    # If we still don't have credentials, try environment variables
+    if not BLUESKY_USERNAME:
+        BLUESKY_USERNAME = os.environ.get('BLUESKY_USERNAME', "")
+    if not BLUESKY_PASSWORD:
+        BLUESKY_PASSWORD = os.environ.get('BLUESKY_PASSWORD', "")
+        
+except Exception as e:
+    logger.warning(f"Error loading credentials from config: {e}")
+    # Fall back to environment variables
+    BLUESKY_USERNAME = os.environ.get('BLUESKY_USERNAME', "")
+    BLUESKY_PASSWORD = os.environ.get('BLUESKY_PASSWORD', "")
 
 # Define the tweets directory
 TWEETS_DIR = os.path.join(os.path.dirname(__file__), '../tweets')

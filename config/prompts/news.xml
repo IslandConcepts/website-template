@@ -1,111 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- News Generation Prompts -->
+<!-- News Prompts Configuration -->
 <prompts>
-  <!-- System prompt for breaking news content generation -->
-  <system_prompt>
-    <![CDATA[
-    You are {{system_role_description}}. Your task is to create {{content_tone}} news articles based on the following prompt. 
-    The content should be {{content_style}} and reflect {{site_mission}}.
-    
-    Write in a {{writing_style}} style with {{tone_adjective}} tone. Include quotes from fictional sources and officials when appropriate.
-    
-    Make sure to:
-    - Use proper journalistic structure with a strong headline and lead paragraph
-    - Include {{detail_level}} specific details to make the story believable
-    - Maintain the {{site_voice}} throughout the article
-    - Target an audience that is {{target_audience}}
-    - Include a compelling hook and satisfying conclusion
-    ]]>
-  </system_prompt>
+  <!-- System prompts for different content types -->
+  <system_prompt>You are a writer for {{site.info.title}}, creating content for social media.</system_prompt>
   
-  <!-- User prompt template for breaking news -->
-  <user_prompt>
-    <![CDATA[
-    Write a {{article_length}} news article with the following characteristics:
+  <!-- Tweet generation prompts -->
+  <tweet_prompt>
+    Generate a tweet for {{site.info.title}}.
+
+    The tweet should:
+    1. Be short (under 200 characters)
+    2. Be attention-grabbing and interesting
+    3. Be formatted as a standalone tweet (no hashtags or @mentions)
+    4. Focus on current events or trending topics
+    5. Use appropriate tone based on the site's focus
     
-    Topic: {{article_topic}}
-    
-    Key elements to include:
-    - {{key_element_1}}
-    - {{key_element_2}}
-    - {{key_element_3}}
-    
-    The article should mention {{key_people}} and focus on {{focus_area}}.
-    
-    Make the headline attention-grabbing and include the date {{current_date}} in a natural way.
-    
-    The article should be formatted in Markdown with a clear headline, subheadings, and paragraphs.
-    
-    Important: Maintain {{site_tone}} throughout, but make it feel like genuine news reporting.
-    ]]>
-  </user_prompt>
+    Write the tweet as if from an authoritative news source.
+  </tweet_prompt>
   
-  <!-- Breaking news headline generation prompt -->
-  <headline_prompt>
-    <![CDATA[
-    Create 5 alternative headlines for a {{site_tone}} news article about {{article_topic}}. 
+  <absurd_tweet_prompt>
+    Generate an interesting tweet for {{site.info.title}} about a recent news story or event.
+
+    The tweet should:
+    1. Be concise (under 200 characters)
+    2. Be attention-grabbing and unique
+    3. Have a creative angle or perspective
+    4. Use appropriate language for the topic
+    5. Be formatted clearly for social media
     
-    The headlines should be:
-    - Attention-grabbing and compelling
-    - Between 5-10 words
-    - Include a strong action verb
-    - Mention {{key_element}} if possible
-    - Match the {{site_voice}} style
-    
-    Format the response as a numbered list of headlines only.
-    ]]>
-  </headline_prompt>
+    Make it sound like a breaking news or feature story.
+  </absurd_tweet_prompt>
   
-  <!-- Content variations/templates for different sections -->
-  <article_templates>
-    <template name="standard">
-      <![CDATA[
-      # [HEADLINE]
-      
-      *By {{author_name}} | {{current_date}}*
-      
-      [FIRST PARAGRAPH - strong lead with primary news hook]
-      
-      [SECOND PARAGRAPH - additional key details]
-      
-      [QUOTE FROM OFFICIAL]
-      
-      [BACKGROUND CONTEXT]
-      
-      [ADDITIONAL DETAILS]
-      
-      [OPPOSING VIEWPOINT OR ADDITIONAL PERSPECTIVE]
-      
-      [CONCLUSION WITH FORWARD-LOOKING STATEMENT]
-      ]]>
-    </template>
+  <news_tweet_prompt>
+    Generate a tweet about the following news:
     
-    <template name="investigative">
-      <![CDATA[
-      # [HEADLINE]
-      
-      *EXCLUSIVE | By {{author_name}} | {{current_date}}*
-      
-      [DRAMATIC OPENING HOOK]
-      
-      [REVELATION OF KEY FINDING]
-      
-      [CONTEXT AND SIGNIFICANCE]
-      
-      [DETAILS OF INVESTIGATION]
-      
-      [FIRST EXPERT QUOTE]
-      
-      [OPPOSING PERSPECTIVE OR DENIAL]
-      
-      [FURTHER EVIDENCE]
-      
-      [SECOND EXPERT QUOTE]
-      
-      [IMPLICATIONS AND NEXT STEPS]
-      
-      [POWERFUL CONCLUSION]
-      ]]>
-    </template>
-  </article_templates>
+    Title: {{title}}
+    
+    Description: {{description}}
+    
+    The tweet should:
+    1. Be short and attention-grabbing (under 200 characters)
+    2. Include a unique perspective or insight about the news
+    3. Be creative but factual
+    4. Use engaging language
+    5. Be appropriate for the topic
+    6. Do NOT include the URL (we'll add that separately)
+    
+    IMPORTANT: Your tweet should be interesting and shareable.
+    
+    Write ONLY the tweet text, nothing else.
+  </news_tweet_prompt>
+  
+  <article_tweet_prompt>
+    Write a tweet promoting this article.
+    
+    Title: {{title}}
+    
+    First paragraph: {{first_paragraph}}
+    
+    The tweet should:
+    1. Be concise and attention-grabbing (under 200 characters)
+    2. Present a unique angle on the article's content
+    3. Include the most interesting aspect of the article
+    4. Use appropriate tone based on the article's subject
+    5. Do NOT include the URL (we'll add that separately)
+    6. Do NOT include hashtags (we'll add those separately)
+    
+    Write ONLY the tweet text, nothing else.
+  </article_tweet_prompt>
 </prompts>

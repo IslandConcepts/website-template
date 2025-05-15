@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- News Keywords Configuration -->
+<keywords>
+  <!-- News Keywords by Category -->
+  <category name="news_keywords">
+    <keyword>breaking</keyword>
+    <keyword>news</keyword>
+    <keyword>report</keyword>
+    <keyword>update</keyword>
+    <keyword>latest</keyword>
+    <keyword>story</keyword>
+    <keyword>exclusive</keyword>
+    <keyword>announcement</keyword>
+    <keyword>trending</keyword>
+    <keyword>important</keyword>
+    <keyword>development</keyword>
+    <keyword>press release</keyword>
+    <keyword>headline</keyword>
+    <keyword>just in</keyword>
+    <keyword>alert</keyword>
+  </category>
+  
+  <!-- Topics for tweet generation -->
+  <category name="topics">
+    <keyword>technology</keyword>
+    <keyword>business</keyword>
+    <keyword>science</keyword>
+    <keyword>health</keyword>
+    <keyword>politics</keyword>
+    <keyword>economy</keyword>
+    <keyword>environment</keyword>
+    <keyword>education</keyword>
+    <keyword>entertainment</keyword>
+    <keyword>sports</keyword>
+    <keyword>culture</keyword>
+    <keyword>travel</keyword>
+    <keyword>lifestyle</keyword>
+  </category>
+  
+  <!-- Content types -->
+  <category name="content_types">
+    <keyword>article</keyword>
+    <keyword>interview</keyword>
+    <keyword>opinion</keyword>
+    <keyword>analysis</keyword>
+    <keyword>feature</keyword>
+    <keyword>editorial</keyword>
+    <keyword>review</keyword>
+    <keyword>guide</keyword>
+    <keyword>tutorial</keyword>
+    <keyword>explainer</keyword>
+    <keyword>fact check</keyword>
+  </category>
+</keywords>

@@ -1,10 +1,10 @@
 #!/usr/bin/env python
-# This script generates various types of tweets for the @signal_leaks account
+# This script generates various types of tweets for social media accounts
 # It will generate tweets based on different approaches:
 # 1. Article summaries with links
-# 2. Signal leak references
+# 2. News references
 # 3. Commentary on current events
-# 4. Absurd government leaks
+# 4. Content based on site keywords
 #
 # The script now generates a pool of tweets (default: 25) and selects
 # the most unique ones based on content similarity analysis to ensure we always
@@ -271,14 +271,14 @@ def load_articles(days_back=2):
     # Return only recent articles
     return recent_articles
 
-def load_signal_leaks(days_back=2):
+def load_news_items(days_back=2):
     """
-    Load latest signal chats and leaks from the last N days
+    Load latest news items from the last N days
     
     Args:
         days_back: Number of days to look back for recent content (default: 2)
     """
-    signal_leaks = []
+    news_items = []
     checked_items = 0
     matched_items = 0
     
@@ -287,7 +287,7 @@ def load_signal_leaks(days_back=2):
     today = datetime.now()
     cutoff_date = today - timedelta(days=days_back)
     cutoff_date_str = cutoff_date.strftime("%Y%m%d")
-    logger.info(f"Using cutoff date for recent signal leaks: {cutoff_date_str} (looking back {days_back} days)")
+    logger.info(f"Using cutoff date for recent news items: {cutoff_date_str} (looking back {days_back} days)")
     
     # Try to load from recent daily news files
     daily_news_files = []
@@ -325,27 +325,37 @@ def load_signal_leaks(days_back=2):
                     title = item.get("title", "").lower()
                     description = item.get("description", "").lower()
                     
-                    leak_keywords = ["leak", "signal", "chat", "message", "pentagon", "hegseth", "classified", "secret", "confidential", "internal", "source", "insider", "whistleblower", "document", "memo", "Pentagon", "Vance", "Trump", "Whitehouse", "White House", "Congress", "Rubio", "Kash Patel", "CIA", "FBI", "Democrats", "Republicans", "Defense", "DoD", "Government", "Intelligence", "National Security", "Military", "State Department", "Border", "Supreme Court", "Oval Office"]
+                    # Try to get keywords from config if available
+                    try:
+                        from config_loader import ConfigLoader
+                        config = ConfigLoader()
+                        news_keywords = config.get_keywords_list("news_keywords")
+                        if not news_keywords: # Fallback to default keywords
+                            news_keywords = ["breaking", "news", "report", "update", "latest", "story", "exclusive", "announcement", "trending", "important", "development", "press release"]
+                    except Exception as e:
+                        logger.warning(f"Could not load news keywords from config: {e}")
+                        # Fallback to default keywords
+                        news_keywords = ["breaking", "news", "report", "update", "latest", "story", "exclusive", "announcement", "trending", "important", "development", "press release"]
                     
                     # Check if any keywords are in the title or description
                     matched_keywords = []
-                    for keyword in leak_keywords:
+                    for keyword in news_keywords:
                         if keyword in title or keyword in description:
                             matched_keywords.append(keyword)
                     
                     if matched_keywords:
-                        signal_leaks.append(item)
+                        news_items.append(item)
                         matched_items += 1
-                        logger.debug(f"Found leak item: '{title}' (matched keywords: {', '.join(matched_keywords)})")
+                        logger.debug(f"Found news item: '{title}' (matched keywords: {', '.join(matched_keywords)})")
         except Exception as e:
             logger.warning(f"Error loading leaks from {file}: {e}")
     
     # Display detailed statistics
     logger.info(f"Checked {checked_items} total news items across {len(daily_news_files)} recent daily news files")
-    logger.info(f"Found {matched_items} items matching leak keywords")
-    logger.info(f"Final count: {len(signal_leaks)} signal leaks/chats from the last 2 days")
+    logger.info(f"Found {matched_items} items matching news keywords")
+    logger.info(f"Final count: {len(news_items)} news items from the last {days_back} days")
     
-    return signal_leaks
+    return news_items
 
 def generate_relevant_hashtags(tweet_text, count=2):
     """
@@ -402,18 +412,41 @@ def generate_commentary_tweet(retries=3, base_delay=5):
     """
     Generate a random commentary tweet about current events
     """
-    prompt = """
-    Generate a tweet for @signal_leaks, a satirical news account that publishes absurd leaks from the White House, Pentagon, and U.S. government agencies.
+    # Get site name from config or use placeholder
+    try:
+        from config_loader import ConfigLoader
+        config = ConfigLoader()
+        site_name = config.get_value("site.info.title", "{{site_title}}")
+        # Get tweet prompt from config or use default
+        prompt_text = config.get_prompt_text("news", "tweet_prompt")
+        if prompt_text:
+            prompt = prompt_text
+        else:
+            prompt = f"""
+            Generate a tweet for {site_name}.
 
-    The tweet should:
-    1. Be short (under 200 characters)
-    2. Be satirical and snarky, but in a deadpan way, like the Onion.  
-    3. Reference either the White House, Pentagon, CIA, FBI, or Trump administration
-    4. Be formatted as a standalone tweet (no hashtags or @mentions)
-    5. Not directly mention "leaks" or "Signal" app
-    
-    Make it sound like a serious news source revealing an absurd government situation.
-    """
+            The tweet should:
+            1. Be short (under 200 characters)
+            2. Be attention-grabbing and interesting
+            3. Be formatted as a standalone tweet (no hashtags or @mentions)
+            4. Focus on current events or trending topics
+            5. Use appropriate tone based on the site's focus
+            
+            Write the tweet as if from an authoritative news source.
+            """
+    except Exception as e:
+        logger.warning(f"Could not load config for prompt: {e}")
+        prompt = """
+        Generate a tweet about current events.
+
+        The tweet should:
+        1. Be short (under 200 characters)
+        2. Be attention-grabbing and interesting
+        3. Be formatted as a standalone tweet (no hashtags or @mentions)
+        4. Focus on trending topics or news
+        
+        Write the tweet as if from a news publisher.
+        """
     
     max_attempts = retries
     for attempt in range(max_attempts):
@@ -484,7 +517,15 @@ def generate_article_summary_tweet(article, retries=3, base_delay=5):
             first_para = line
             break
     
-    site_url = "https://signalleaks.com"
+    # Get site URL from config or use placeholder
+    try:
+        from config_loader import ConfigLoader
+        config = ConfigLoader()
+        site_url = config.get_value("site.info.baseURL", "{{site_url}}")
+    except Exception as e:
+        logger.warning(f"Could not load site URL from config: {e}")
+        site_url = os.environ.get("SITE_URL", "{{site_url}}")
+    
     url = f"{site_url}{article['path']}"
     
     max_text_length = 280 - (len(url) + 1)  # Leave room for URL and space
@@ -574,18 +615,41 @@ def generate_absurd_take_tweet(retries=3, base_delay=5):
     """
     Generate an absurd take on a current government or political topic
     """
-    prompt = """
-    Generate an absurd, satirical tweet from @signal_leaks about a leaked memo, document, or plan from a U.S. government agency.
+    # Try to get prompt from config
+    try:
+        from config_loader import ConfigLoader
+        config = ConfigLoader()
+        site_name = config.get_value("site.info.title", "{{site_title}}")
+        # Get tweet prompt from config or use default
+        prompt_text = config.get_prompt_text("news", "absurd_tweet_prompt")
+        if prompt_text:
+            prompt = prompt_text
+        else:
+            prompt = f"""
+            Generate an interesting tweet for {site_name} about a recent news story or event.
 
-    The tweet should:
-    1. Be concise (under 200 characters)
-    2. Mention a specific government entity (White House, Pentagon, CIA, FBI, NSA, State Department, etc.)
-    3. Describe a ridiculous initiative, plan, or internal memo that sounds slightly plausible but is clearly absurd
-    4. Use formal bureaucratic language to describe something absurd
-    5. Not reference "leaks" or "Signal" directly
-    
-    Make it sound like a breaking news revelation of an internal government document.
-    """
+            The tweet should:
+            1. Be concise (under 200 characters)
+            2. Be attention-grabbing and unique
+            3. Have a creative angle or perspective
+            4. Use appropriate language for the topic
+            5. Be formatted clearly for social media
+            
+            Make it sound like a breaking news or feature story.
+            """
+    except Exception as e:
+        logger.warning(f"Could not load config for prompt: {e}")
+        prompt = """
+        Generate an interesting tweet about a recent news story or trending topic.
+
+        The tweet should:
+        1. Be concise (under 200 characters)
+        2. Be attention-grabbing and unique
+        3. Have a creative angle or perspective
+        4. Be formatted clearly for social media
+        
+        Make it sound interesting and shareable.
+        """
     
     max_text_length = 280
     
@@ -643,37 +707,60 @@ def generate_absurd_take_tweet(retries=3, base_delay=5):
                 logger.error("Max retries reached for generating absurd take tweet")
                 return None
 
-def generate_signal_leak_tweet(leak, retries=3, base_delay=5):
+def generate_news_tweet(leak, retries=3, base_delay=5):
     """
-    Generate a tweet based on a real leak about Signal chats
+    Generate a tweet based on a news item
     """
     title = leak.get("title", "")
     description = leak.get("description", "")
     url = leak.get("url", "")
     
-    prompt = f"""
-    Generate a tweet from @signal_leaks about the following news:
-    
-    Title: {title}
-    
-    Description: {description}
-    
-    The tweet should:
-    1. Be short and attention-grabbing (under 200 characters)
-    2. NEVER just summarize the article - add strong satirical commentary or absurd interpretation
-    3. Present an outrageous "behind the scenes" detail that supposedly explains the news
-    4. Make it sound like we have exclusive classified information that reveals something completely ridiculous
-    5. Use dry, bureaucratic language to describe something utterly absurd
-    6. Do NOT include the URL (we'll add that separately)
-    7. Do NOT mention Signal Leaks directly
-    
-    IMPORTANT: Your tweet MUST feature satirical commentary - not just facts from the article.
-    EXAMPLES:
-    - Instead of "FBI investigates fraud case" → "Internal FBI memo reveals agents investigating fraud case must first prove Santa isn't real"
-    - Instead of "Trump criticizes economic policy" → "Classified White House documents show Trump using Magic 8-Ball to make all economic decisions"
-    
-    Write ONLY the tweet text, nothing else.
-    """
+    # Try to get prompt from config
+    try:
+        from config_loader import ConfigLoader
+        config = ConfigLoader()
+        # Get tweet prompt from config or use default
+        prompt_text = config.get_prompt_text("news", "news_tweet_prompt")
+        if prompt_text:
+            # Replace variables in the template
+            prompt = config.process_template(prompt_text, {"title": title, "description": description})
+        else:
+            prompt = f"""
+            Generate a tweet about the following news:
+            
+            Title: {title}
+            
+            Description: {description}
+            
+            The tweet should:
+            1. Be short and attention-grabbing (under 200 characters)
+            2. Include a unique perspective or insight about the news
+            3. Be creative but factual
+            4. Use engaging language
+            5. Be appropriate for the topic
+            6. Do NOT include the URL (we'll add that separately)
+            
+            IMPORTANT: Your tweet should be interesting and shareable.
+            
+            Write ONLY the tweet text, nothing else.
+            """
+    except Exception as e:
+        logger.warning(f"Could not load config for prompt: {e}")
+        prompt = f"""
+        Generate a tweet about the following news:
+        
+        Title: {title}
+        
+        Description: {description}
+        
+        The tweet should:
+        1. Be short and attention-grabbing (under 200 characters)
+        2. Include a unique perspective or insight
+        3. Be creative but factual
+        4. Do NOT include the URL (we'll add that separately)
+        
+        Write ONLY the tweet text, nothing else.
+        """
     
     max_text_length = 280
     if url:
@@ -841,9 +928,9 @@ def generate_tweets(count=30, platform="both", large_pool_size=25, days_back=2):
     all_tweets_for_comparison = existing_tweets + recent_tweets
     
     # Load content for tweet generation - using the specified days_back parameter
-    logger.info(f"Loading articles and signal leaks from the past {days_back} days")
+    logger.info(f"Loading articles and news items from the past {days_back} days")
     articles = load_articles(days_back=days_back)
-    signal_leaks = load_signal_leaks(days_back=days_back)
+    news_items = load_news_items(days_back=days_back)
     
     # Sort articles by random to prioritize different content each time
     random.shuffle(articles)
@@ -851,33 +938,48 @@ def generate_tweets(count=30, platform="both", large_pool_size=25, days_back=2):
     # Weight the different types of tweets
     tweet_types = []
     
-    # If we have articles and leaks, use a mix
-    if articles and signal_leaks:
+    # Try to get weights from config
+    try:
+        from config_loader import ConfigLoader
+        config = ConfigLoader()
+        article_weight = float(config.get_value("social.sharing.article_weight", "0.4"))
+        news_weight = float(config.get_value("social.sharing.news_weight", "0.3"))
+        commentary_weight = float(config.get_value("social.sharing.commentary_weight", "0.2"))
+        creative_weight = float(config.get_value("social.sharing.creative_weight", "0.1"))
+    except Exception as e:
+        logger.warning(f"Could not load weights from config: {e}")
+        article_weight = 0.4
+        news_weight = 0.3
+        commentary_weight = 0.2
+        creative_weight = 0.1
+    
+    # If we have articles and news items, use a mix
+    if articles and news_items:
         tweet_types = [
-            {"type": "article", "weight": 0.4, "data": articles},
-            {"type": "signal_leak", "weight": 0.3, "data": signal_leaks},
-            {"type": "commentary", "weight": 0.2, "data": None},
-            {"type": "absurd_take", "weight": 0.1, "data": None}
+            {"type": "article", "weight": article_weight, "data": articles},
+            {"type": "news_item", "weight": news_weight, "data": news_items},
+            {"type": "commentary", "weight": commentary_weight, "data": None},
+            {"type": "absurd_take", "weight": creative_weight, "data": None}
         ]
     # If we have only articles
     elif articles:
         tweet_types = [
-            {"type": "article", "weight": 0.6, "data": articles},
-            {"type": "commentary", "weight": 0.2, "data": None},
-            {"type": "absurd_take", "weight": 0.2, "data": None}
+            {"type": "article", "weight": article_weight + news_weight/2, "data": articles},
+            {"type": "commentary", "weight": commentary_weight + news_weight/4, "data": None},
+            {"type": "absurd_take", "weight": creative_weight + news_weight/4, "data": None}
         ]
-    # If we have only leaks
-    elif signal_leaks:
+    # If we have only news items
+    elif news_items:
         tweet_types = [
-            {"type": "signal_leak", "weight": 0.6, "data": signal_leaks},
-            {"type": "commentary", "weight": 0.2, "data": None},
-            {"type": "absurd_take", "weight": 0.2, "data": None}
+            {"type": "news_item", "weight": news_weight + article_weight/2, "data": news_items},
+            {"type": "commentary", "weight": commentary_weight + article_weight/4, "data": None},
+            {"type": "absurd_take", "weight": creative_weight + article_weight/4, "data": None}
         ]
     # If we have neither, just generate random tweets
     else:
         tweet_types = [
-            {"type": "commentary", "weight": 0.5, "data": None},
-            {"type": "absurd_take", "weight": 0.5, "data": None}
+            {"type": "commentary", "weight": 0.6, "data": None},
+            {"type": "absurd_take", "weight": 0.4, "data": None}
         ]
     
     # Calculate cumulative weights for weighted random selection
@@ -896,7 +998,7 @@ def generate_tweets(count=30, platform="both", large_pool_size=25, days_back=2):
     # Track tweet types for metrics
     tweet_type_counts = {
         "article": 0,
-        "signal_leak": 0,
+        "news_item": 0,
         "commentary": 0,
         "absurd_take": 0
     }
@@ -933,18 +1035,18 @@ def generate_tweets(count=30, platform="both", large_pool_size=25, days_back=2):
                 used_articles.add(article["title"])
                 tweet_type = "article"
                 
-        elif selected_type["type"] == "signal_leak" and signal_leaks:
-            # Find an unused leak
-            available_leaks = [l for l in signal_leaks if l.get("title") not in used_leaks]
-            if not available_leaks:
-                # If we've used all leaks, continue with other tweet types
+        elif selected_type["type"] == "news_item" and news_items:
+            # Find an unused news item
+            available_news = [l for l in news_items if l.get("title") not in used_leaks]
+            if not available_news:
+                # If we've used all news items, continue with other tweet types
                 continue
             
-            leak = random.choice(available_leaks)
-            tweet = generate_signal_leak_tweet(leak)
+            news_item = random.choice(available_news)
+            tweet = generate_news_tweet(news_item)
             if tweet:
-                used_leaks.add(leak.get("title"))
-                tweet_type = "signal_leak"
+                used_leaks.add(news_item.get("title"))
+                tweet_type = "news_item"
                 
         elif selected_type["type"] == "commentary":
             tweet = generate_commentary_tweet()
@@ -1057,7 +1159,16 @@ def generate_tweets(count=30, platform="both", large_pool_size=25, days_back=2):
 # in the dictionary now
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Generate tweets for Signal Leaks")
+    # Try to get site name from config for help text
+    try:
+        from config_loader import ConfigLoader
+        config = ConfigLoader()
+        site_name = config.get_value("site.info.title", "your website")
+        description = f"Generate tweets for {site_name}"
+    except Exception:
+        description = "Generate tweets for your website"
+        
+    parser = argparse.ArgumentParser(description=description)
     parser.add_argument("--count", type=int, default=30, help="Number of tweets to generate")
     parser.add_argument("--platform", type=str, default="both", choices=["both", "x", "twitter", "bluesky"], help="Platform to generate tweets for")
     parser.add_argument("--creative", action="store_true", help="Use higher temperature for more creative content")
