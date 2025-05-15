@@ -1,0 +1,75 @@
+name: Generate Content
+
+on:
+  schedule:
+    # Run at 6 AM UTC every day
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+    inputs:
+      content_count:
+        description: 'Number of content items to generate'
+        required: true
+        default: '3'
+      content_type:
+        description: 'Type of content to generate'
+        required: true
+        default: 'news'
+        type: choice
+        options:
+          - news
+          - posts
+          - trends
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: Generate content
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GNEWS_API_KEY: ${{ secrets.GNEWS_API_KEY }}
+        run: |
+          # Create logs directory if it doesn't exist
+          mkdir -p logs
+          
+          # If workflow was triggered manually, use the input parameters
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            CONTENT_COUNT="${{ github.event.inputs.content_count }}"
+            CONTENT_TYPE="${{ github.event.inputs.content_type }}"
+          else
+            # Default values for scheduled runs
+            CONTENT_COUNT=3
+            CONTENT_TYPE="news"
+          fi
+          
+          echo "Generating $CONTENT_COUNT $CONTENT_TYPE items..."
+          python scripts/generate_content.py --count $CONTENT_COUNT --type $CONTENT_TYPE
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          git add content/
+          
+          # Only commit if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Automated content generation: $(date +'%Y-%m-%d %H:%M:%S')"
+            git push
+          fi

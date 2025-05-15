@@ -1,0 +1,216 @@
+name: Post to Bluesky
+
+on:
+  schedule:
+    # Regular hours: Post at 15 minutes past the hour (staggered from X posts)
+    - cron: "15 7,9,11,13,15,21,23 * * *"
+    # Peak hours (1-4pm EST = 17-20 UTC): Post at 15 and 30 minutes past the hour
+    - cron: "15 17,18,19,20 * * *"
+    - cron: "30 17,18,19,20 * * *"
+  workflow_dispatch:
+    inputs:
+      count:
+        description: 'Number of posts to publish'
+        required: false
+        default: '1'
+      pool_size:
+        description: 'Size of initial post pool to generate (default: 12)'
+        required: false
+        default: '12'
+
+# Explicitly grant permission to push to the repository
+permissions:
+  contents: write
+
+jobs:
+  post-to-bluesky:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Fetch all history for proper commits
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          # Install metrics tracking dependencies
+          pip install matplotlib numpy pandas
+
+      - name: Create required directories
+        run: |
+          # Create but don't commit the logs directory (it's in .gitignore)
+          mkdir -p logs
+          # Create the tweets directory that will be committed
+          mkdir -p tweets
+          # Create a .gitkeep file in tweets directory to ensure it's trackable even if empty
+          touch tweets/.gitkeep
+          # Create metrics directories for tracking tweet generation statistics
+          mkdir -p metrics/graphs
+
+      - name: Check for available tweets and generate if needed
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          # Get today's date for daily tweet file
+          TODAY=$(date -u +%Y%m%d)
+          TWEET_FILE="tweets/tweets_${TODAY}.txt"
+          
+          # Check if today's tweet file exists
+          if [ -f "$TWEET_FILE" ]; then
+            echo "Found existing tweet file for today: $TWEET_FILE"
+            # Count number of tweets in the file
+            TWEET_COUNT=$(grep -c "---" "$TWEET_FILE" || echo "0")
+            echo "File contains approximately $TWEET_COUNT tweets"
+            
+            # Only generate new tweets if the file has fewer than 5 tweets
+            if [ "$TWEET_COUNT" -lt 5 ]; then
+              echo "Generating additional tweets to ensure sufficient content"
+              python scripts/generate_tweets.py --count 5 --pool-size 12 --platform both
+            else
+              echo "Sufficient tweets available for today, no need to generate more"
+            fi
+          else
+            echo "No tweet file found for today, generating initial set of tweets"
+            # Generate 12 tweets for the day to use across platforms
+            python scripts/generate_tweets.py --count 12 --pool-size 12 --platform both
+          fi
+
+      - name: Post to Bluesky
+        id: post_to_bluesky
+        env:
+          BLUESKY_USERNAME: ${{ secrets.BLUESKY_USERNAME }}
+          BLUESKY_PASSWORD: ${{ secrets.BLUESKY_PASSWORD }}
+        run: |
+          # Using standard bash comparison (= instead of ==) for better portability
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            # For manual runs, first generate posts with specified pool size
+            POOL_SIZE="${{ github.event.inputs.pool_size || '12' }}"
+            COUNT="${{ github.event.inputs.count || '1' }}"
+            
+            echo "Manual run: Generating $COUNT posts from pool of $POOL_SIZE..."
+            python scripts/generate_tweets.py --count $COUNT --pool-size $POOL_SIZE --platform bluesky
+            
+            # Post to Bluesky
+            python scripts/post_tweets.py --platform bluesky --count "$COUNT" --similarity-threshold 0.9
+          else
+            # For scheduled runs, determine post count based on the hour
+            # Get current hour in UTC
+            HOUR=$(date -u +%H)
+            
+            # Always post exactly 1 tweet per run
+            # Frequency is controlled by cron schedule in the workflow
+            COUNT=1
+            echo "Current hour is $HOUR UTC. Posting $COUNT post."
+            
+            # First attempt to post content with existing content
+            OUTPUT=$(python scripts/post_tweets.py --platform bluesky --count $COUNT --similarity-threshold 0.9 2>&1)
+            echo "$OUTPUT"
+            
+            # Check if all posts were too similar and no posting occurred
+            if echo "$OUTPUT" | grep -q "all_tweets_too_similar"; then
+              echo "All available posts were too similar to recent posts. Implementing retry strategy..."
+              
+              # Try up to 3 times with increasing creativity and count
+              for RETRY in {1..3}; do
+                echo "Retry attempt $RETRY: Generating fresh content with increased creativity..."
+                
+                # Escalate with each retry
+                CREATIVITY="--creative"
+                if [ $RETRY -gt 1 ]; then
+                  CREATIVITY="--creative --extraunique"
+                fi
+                
+                # Generate a few fresh posts with each retry, with higher temperature
+                export OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+                GENERATE_COUNT=5  # Generate fewer tweets for faster retry
+                RETRY_POOL_SIZE=8  # Smaller pool size for faster processing
+                
+                echo "Generating $GENERATE_COUNT posts from pool of $RETRY_POOL_SIZE with $CREATIVITY flags..."
+                python scripts/generate_tweets.py --count $GENERATE_COUNT --pool-size $RETRY_POOL_SIZE $CREATIVITY --platform bluesky
+                
+                echo "Trying again with freshly generated posts..."
+                RETRY_OUTPUT=$(python scripts/post_tweets.py --platform bluesky --count $COUNT --similarity-threshold 0.9 2>&1)
+                echo "$RETRY_OUTPUT"
+                
+                # If this attempt was successful, break the loop
+                if ! echo "$RETRY_OUTPUT" | grep -q "all_tweets_too_similar"; then
+                  echo "Successfully posted to Bluesky on retry attempt $RETRY!"
+                  break
+                fi
+                
+                # If this was the last retry and it failed
+                if [ $RETRY -eq 3 ] && echo "$RETRY_OUTPUT" | grep -q "all_tweets_too_similar"; then
+                  echo "::warning::Failed to generate unique content after multiple retries. Using emergency measures."
+                  # Emergency measure: Adjust the similarity threshold
+                  echo "Emergency measure: Attempting to post with relaxed similarity requirements..."
+                  SIMILARITY_THRESHOLD=0.98
+                  python scripts/post_tweets.py --platform bluesky --count $COUNT --similarity-threshold $SIMILARITY_THRESHOLD
+                  
+                  # If all else fails, use --force as absolute last resort
+                  if echo "$RETRY_OUTPUT" | grep -q "all_tweets_too_similar"; then
+                    echo "EMERGENCY FALLBACK: Using --force to bypass similarity checks completely"
+                    python scripts/post_tweets.py --platform bluesky --count $COUNT --force
+                  fi
+                fi
+              done
+            fi
+          fi
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+      - name: Commit new post history and metrics
+        run: |
+          # Force add the tweets directory even if some paths might be ignored
+          git add -f tweets/
+          # Add metrics files if they exist
+          if [ -d "metrics" ] && [ "$(ls -A metrics)" ]; then
+            git add -f metrics/
+            echo "Added metrics files to commit"
+          fi
+          # Don't try to add logs directory as it's purposely ignored in .gitignore
+          git commit -m "Add Bluesky posting history and metrics" || echo "No changes to commit"
+
+      - name: Push changes
+        if: success()
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          # First pull with rebase to incorporate any recent changes
+          git pull --rebase origin || echo "Pull failed but continuing"
+          # Try pushing up to 3 times with retries
+          MAX_RETRIES=3
+          RETRY_COUNT=0
+          PUSH_SUCCESS=false
+          
+          while [ $RETRY_COUNT -lt $MAX_RETRIES ] && [ "$PUSH_SUCCESS" != "true" ]; do
+            echo "Push attempt $(($RETRY_COUNT+1))/$MAX_RETRIES"
+            if git push origin; then
+              PUSH_SUCCESS=true
+              echo "Push succeeded!"
+            else
+              RETRY_COUNT=$(($RETRY_COUNT+1))
+              if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
+                echo "Push failed, pulling latest changes and retrying in 10 seconds..."
+                git pull --rebase origin || echo "Pull failed but continuing"
+                sleep 10
+              else
+                echo "Push failed after $MAX_RETRIES attempts"
+              fi
+            fi
+          done
+          
+          if [ "$PUSH_SUCCESS" != "true" ]; then
+            echo "All push attempts failed. Please check the repository state."
+            exit 1
+          fi

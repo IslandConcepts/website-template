@@ -1,0 +1,25 @@
+# Cron Jobs for Website Template
+# To use this file, copy the relevant lines to your crontab with `crontab -e`
+
+# Generate new content every day at 6 AM
+0 6 * * * cd /path/to/your/website && python scripts/generate_content.py --count 3 --type news >> logs/content_generation.log 2>&1
+
+# Post to social media 3 times per day (9 AM, 1 PM, 5 PM)
+0 9 * * * cd /path/to/your/website && python scripts/post_tweets.py --count 1 >> logs/social_media.log 2>&1
+0 13 * * * cd /path/to/your/website && python scripts/post_tweets.py --count 1 >> logs/social_media.log 2>&1
+0 17 * * * cd /path/to/your/website && python scripts/post_tweets.py --count 1 >> logs/social_media.log 2>&1
+
+# Get daily news updates every morning at 5 AM
+0 5 * * * cd /path/to/your/website && python scripts/get_daily_news.py >> logs/daily_news.log 2>&1
+
+# Rebuild the site every hour
+0 * * * * cd /path/to/your/website && hugo >> logs/hugo_build.log 2>&1
+
+# Cleanup old files once per week (Sunday at midnight)
+0 0 * * 0 cd /path/to/your/website && python scripts/cleanup_old_files.py --days 30 >> logs/cleanup.log 2>&1
+
+# Example GitHub workflow trigger (if hosting on GitHub Pages)
+# 0 0 * * * curl -X POST https://api.github.com/repos/yourusername/your-repo/dispatches \
+#   -H "Accept: application/vnd.github.everest-preview+json" \
+#   -H "Authorization: token YOUR_GITHUB_TOKEN" \
+#   --data '{"event_type": "scheduled-build"}'

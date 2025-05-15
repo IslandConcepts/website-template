@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- News Generation Prompts -->
+<prompts>
+  <!-- System prompt for breaking news content generation -->
+  <system_prompt>
+    <![CDATA[
+    You are {{system_role_description}}. Your task is to create {{content_tone}} news articles based on the following prompt. 
+    The content should be {{content_style}} and reflect {{site_mission}}.
+    
+    Write in a {{writing_style}} style with {{tone_adjective}} tone. Include quotes from fictional sources and officials when appropriate.
+    
+    Make sure to:
+    - Use proper journalistic structure with a strong headline and lead paragraph
+    - Include {{detail_level}} specific details to make the story believable
+    - Maintain the {{site_voice}} throughout the article
+    - Target an audience that is {{target_audience}}
+    - Include a compelling hook and satisfying conclusion
+    ]]>
+  </system_prompt>
+  
+  <!-- User prompt template for breaking news -->
+  <user_prompt>
+    <![CDATA[
+    Write a {{article_length}} news article with the following characteristics:
+    
+    Topic: {{article_topic}}
+    
+    Key elements to include:
+    - {{key_element_1}}
+    - {{key_element_2}}
+    - {{key_element_3}}
+    
+    The article should mention {{key_people}} and focus on {{focus_area}}.
+    
+    Make the headline attention-grabbing and include the date {{current_date}} in a natural way.
+    
+    The article should be formatted in Markdown with a clear headline, subheadings, and paragraphs.
+    
+    Important: Maintain {{site_tone}} throughout, but make it feel like genuine news reporting.
+    ]]>
+  </user_prompt>
+  
+  <!-- Breaking news headline generation prompt -->
+  <headline_prompt>
+    <![CDATA[
+    Create 5 alternative headlines for a {{site_tone}} news article about {{article_topic}}. 
+    
+    The headlines should be:
+    - Attention-grabbing and compelling
+    - Between 5-10 words
+    - Include a strong action verb
+    - Mention {{key_element}} if possible
+    - Match the {{site_voice}} style
+    
+    Format the response as a numbered list of headlines only.
+    ]]>
+  </headline_prompt>
+  
+  <!-- Content variations/templates for different sections -->
+  <article_templates>
+    <template name="standard">
+      <![CDATA[
+      # [HEADLINE]
+      
+      *By {{author_name}} | {{current_date}}*
+      
+      [FIRST PARAGRAPH - strong lead with primary news hook]
+      
+      [SECOND PARAGRAPH - additional key details]
+      
+      [QUOTE FROM OFFICIAL]
+      
+      [BACKGROUND CONTEXT]
+      
+      [ADDITIONAL DETAILS]
+      
+      [OPPOSING VIEWPOINT OR ADDITIONAL PERSPECTIVE]
+      
+      [CONCLUSION WITH FORWARD-LOOKING STATEMENT]
+      ]]>
+    </template>
+    
+    <template name="investigative">
+      <![CDATA[
+      # [HEADLINE]
+      
+      *EXCLUSIVE | By {{author_name}} | {{current_date}}*
+      
+      [DRAMATIC OPENING HOOK]
+      
+      [REVELATION OF KEY FINDING]
+      
+      [CONTEXT AND SIGNIFICANCE]
+      
+      [DETAILS OF INVESTIGATION]
+      
+      [FIRST EXPERT QUOTE]
+      
+      [OPPOSING PERSPECTIVE OR DENIAL]
+      
+      [FURTHER EVIDENCE]
+      
+      [SECOND EXPERT QUOTE]
+      
+      [IMPLICATIONS AND NEXT STEPS]
+      
+      [POWERFUL CONCLUSION]
+      ]]>
+    </template>
+  </article_templates>
+</prompts>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Site Configuration -->
+<site>
+  <!-- Basic Site Information -->
+  <info>
+    <title>{{site_title}}</title>
+    <tagline>{{site_tagline}}</tagline>
+    <description>{{site_description}}</description>
+    <baseURL>{{site_baseurl}}</baseURL>
+    <languageCode>{{site_language_code}}</languageCode>
+    <defaultAuthor>{{default_author}}</defaultAuthor>
+    <copyrightText>{{copyright_text}}</copyrightText>
+  </info>
+  
+  <!-- SEO Settings -->
+  <seo>
+    <metaDescription>{{meta_description}}</metaDescription>
+    <keywords>{{meta_keywords}}</keywords>
+    <twitterCard>summary_large_image</twitterCard>
+    <ogType>website</ogType>
+    <canonical>true</canonical>
+    <robots>index, follow</robots>
+    <defaultImage>{{default_meta_image}}</defaultImage>
+  </seo>
+  
+  <!-- Analytics and Ads -->
+  <analytics>
+    <googleAnalyticsID>{{google_analytics_id}}</googleAnalyticsID>
+    <googleAdsenseID>{{google_adsense_id}}</googleAdsenseID>
+    <googleTagManagerID>{{google_tag_manager_id}}</googleTagManagerID>
+    <facebookPixelID>{{facebook_pixel_id}}</facebookPixelID>
+    <matomoSiteID>{{matomo_site_id}}</matomoSiteID>
+    <matomoURL>{{matomo_url}}</matomoURL>
+  </analytics>
+  
+  <!-- Branding -->
+  <branding>
+    <logoPath>{{logo_path}}</logoPath>
+    <logoAlt>{{logo_alt}}</logoAlt>
+    <faviconPath>{{favicon_path}}</faviconPath>
+    <appleTouchIcon>{{apple_touch_icon}}</appleTouchIcon>
+    <mobileTitleSuffix>{{mobile_title_suffix}}</mobileTitleSuffix>
+    <mobileDisclaimer>{{mobile_disclaimer}}</mobileDisclaimer>
+  </branding>
+  
+  <!-- Design -->
+  <design>
+    <primaryColor>{{primary_color}}</primaryColor>
+    <secondaryColor>{{secondary_color}}</secondaryColor>
+    <accentColor>{{accent_color}}</accentColor>
+    <textColor>{{text_color}}</textColor>
+    <backgroundColor>{{background_color}}</backgroundColor>
+    <linkColor>{{link_color}}</linkColor>
+    <headerBackgroundColor>{{header_background_color}}</headerBackgroundColor>
+    <footerBackgroundColor>{{footer_background_color}}</footerBackgroundColor>
+    <font>
+      <headings>{{headings_font}}</headings>
+      <body>{{body_font}}</body>
+      <monospace>{{monospace_font}}</monospace>
+    </font>
+  </design>
+  
+  <!-- Content Settings -->
+  <content>
+    <postsPerPage>{{posts_per_page}}</postsPerPage>
+    <featuredPostCount>{{featured_post_count}}</featuredPostCount>
+    <showRelatedPosts>{{show_related_posts}}</showRelatedPosts>
+    <relatedPostCount>{{related_post_count}}</relatedPostCount>
+    <enableComments>{{enable_comments}}</enableComments>
+    <commentsProvider>{{comments_provider}}</commentsProvider>
+    <showAuthorInfo>{{show_author_info}}</showAuthorInfo>
+    <showPostDate>{{show_post_date}}</showPostDate>
+    <showReadingTime>{{show_reading_time}}</showReadingTime>
+  </content>
+</site>

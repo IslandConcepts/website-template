@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+<head>
+  {{ if .Site.Params.analytics.googleAnalyticsID }}
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.Params.analytics.googleAnalyticsID }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', '{{ .Site.Params.analytics.googleAnalyticsID }}');
+  </script>
+  {{ end }}
+  
+  <!-- Include enhanced meta tags for SEO -->
+  {{ partial "head.html" . }}
+  
+  {{ if .Site.Params.analytics.googleAdsenseID }}
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ .Site.Params.analytics.googleAdsenseID }}" crossorigin="anonymous"></script>
+  {{ end }}
+  
+  <!-- Schema.org Structured Data -->
+  {{ if templates.Exists "partials/seo/schema.html" }}
+  {{ partial "seo/schema.html" . }}
+  {{ end }}
+</head>
+<body{{ if eq .RelPermalink "/" }} class="frontpage"{{ end }}>
+
+<!-- Google Tag Manager (noscript) -->
+{{ if .Site.Params.analytics.googleTagManagerID }}
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ .Site.Params.analytics.googleTagManagerID }}"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+{{ end }}
+
+<header>
+  <div class="header-container">
+    <a href="/" class="logo">
+      <img src="{{ .Site.Params.branding.logoPath }}" alt="{{ .Site.Params.branding.logoAlt }}" class="logo-icon">
+    </a>
+
+    <!-- Mobile Title -->
+    <div class="mobile-title-inline">{{ .Site.Title }}</div>
+    <div class="mobile-disclaimer">{{ .Site.Params.branding.mobileDisclaimer }}</div>
+
+    <!-- Hamburger -->
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navMenu">
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    </button>
+
+    <!-- Nav Menu -->
+    <nav class="header-nav" id="navMenu" aria-label="Main navigation">
+      {{ range .Site.Params.nav }}
+        {{ if not (eq .visible false) }}
+          <a href="{{ .url }}">{{ .title }}</a>
+        {{ end }}
+      {{ end }}
+
+      <!-- Socials (Mobile) -->
+      <div class="socials-mobile">
+        {{ range .Site.Params.socials }}
+          <a href="{{ .url }}" target="_blank" rel="noopener" aria-label="{{ .name }}">
+            <img src="{{ .icon }}" alt="{{ .name }} logo" class="social-icon" />
+          </a>
+        {{ end }}
+      </div>
+    </nav>
+  </div>
+</header>
+
+  <!-- Mobile Nav Toggle Script -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("navMenu");
+
+    if (hamburger && navMenu) {
+      hamburger.addEventListener("click", function () {
+        const isOpen = navMenu.classList.toggle("nav-open");
+        hamburger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+    } else {
+      console.warn("Hamburger menu or navMenu not found in DOM.");
+    }
+  });
+</script>
+
+  <!-- Main Content Area -->
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    {{ partial "footer.html" . }}
+  </footer>
+
+</body>
+</html>

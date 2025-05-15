@@ -1,0 +1,70 @@
+name: Get Daily News
+
+on:
+  schedule:
+    # Run at 5 AM UTC every day
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+    inputs:
+      query:
+        description: 'News search query (optional)'
+        required: false
+      country:
+        description: 'Country code (optional)'
+        required: false
+        default: 'us'
+
+jobs:
+  fetch_news:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: Fetch daily news
+        env:
+          GNEWS_API_KEY: ${{ secrets.GNEWS_API_KEY }}
+          NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
+        run: |
+          # Create logs directory if it doesn't exist
+          mkdir -p logs
+          
+          # If workflow was triggered manually and query is provided
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && -n "${{ github.event.inputs.query }}" ]]; then
+            QUERY="${{ github.event.inputs.query }}"
+            COUNTRY="${{ github.event.inputs.country }}"
+            
+            echo "Fetching news with custom query: $QUERY, country: $COUNTRY"
+            python scripts/get_daily_news.py --query "$QUERY" --country "$COUNTRY"
+          else
+            # Default behavior - use queries from XML config
+            echo "Fetching news with default configuration..."
+            python scripts/get_daily_news.py
+          fi
+      
+      - name: Commit and push daily news
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Add any new daily news files
+          git add scripts/daily_news_*.json
+          
+          # Only commit if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Daily news update: $(date +'%Y-%m-%d')"
+            git push
+          fi

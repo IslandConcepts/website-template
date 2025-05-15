@@ -1,0 +1,130 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- SEO Meta Tags -->
+<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}</title>
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary | plainify | truncate 160 }}{{ else }}{{ with .Site.Params.Description }}{{ . }}{{ end }}{{ end }}{{ end }}">
+
+<!-- Open Graph Meta Tags -->
+<meta property="og:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}">
+<meta property="og:description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary | plainify | truncate 160 }}{{ else }}{{ with .Site.Params.Description }}{{ . }}{{ end }}{{ end }}{{ end }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}{{ .Site.Params.seo.ogType }}{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+{{ with .Params.image }}
+<meta property="og:image" content="{{ . | absURL }}">
+{{ else }}
+<meta property="og:image" content="{{ .Site.Params.seo.defaultImage | absURL }}">
+{{ end }}
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="{{ .Site.Params.seo.twitterCard }}">
+<meta name="twitter:title" content="{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}">
+<meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary | plainify | truncate 160 }}{{ else }}{{ with .Site.Params.Description }}{{ . }}{{ end }}{{ end }}{{ end }}">
+{{ with .Params.image }}
+<meta name="twitter:image" content="{{ . | absURL }}">
+{{ else }}
+<meta name="twitter:image" content="{{ .Site.Params.seo.defaultImage | absURL }}">
+{{ end }}
+
+<!-- Keywords Meta Tag -->
+<meta name="keywords" content="{{ if .Params.keywords }}{{ delimit .Params.keywords ", " }}{{ else }}{{ .Site.Params.seo.keywords }}{{ end }}">
+
+<!-- Canonical URL -->
+{{ if .Site.Params.seo.canonical }}
+<link rel="canonical" href="{{ .Permalink }}">
+{{ end }}
+
+<!-- Include CSS -->
+{{ if (fileExists "assets/css/style.css") }}
+{{ $styles := resources.Get "css/style.css" | resources.Minify | resources.Fingerprint }}
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}" />
+{{ end }}
+
+<!-- Additional Custom CSS -->
+{{ if (fileExists "assets/css/custom.css") }}
+{{ $customStyles := resources.Get "css/custom.css" | resources.Minify | resources.Fingerprint }}
+<link rel="stylesheet" href="{{ $customStyles.RelPermalink }}" />
+{{ end }}
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="{{ .Site.Params.branding.faviconPath }}">
+
+<!-- Apple Touch Icon -->
+{{ if .Site.Params.branding.appleTouchIcon }}
+<link rel="apple-touch-icon" href="{{ .Site.Params.branding.appleTouchIcon }}">
+{{ end }}
+
+<!-- Additional Meta Tags -->
+<meta name="author" content="{{ .Site.Params.info.defaultAuthor }}">
+<meta name="robots" content="{{ .Site.Params.seo.robots }}">
+
+<!-- Custom Fonts -->
+{{ if .Site.Params.design.font.body }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family={{ .Site.Params.design.font.body | urlize }}&family={{ .Site.Params.design.font.headings | urlize }}&display=swap" rel="stylesheet">
+{{ end }}
+
+<!-- Custom CSS Variables for Theming -->
+<style>
+:root {
+  --primary-color: {{ .Site.Params.design.primaryColor }};
+  --secondary-color: {{ .Site.Params.design.secondaryColor }};
+  --accent-color: {{ .Site.Params.design.accentColor }};
+  --text-color: {{ .Site.Params.design.textColor }};
+  --background-color: {{ .Site.Params.design.backgroundColor }};
+  --link-color: {{ .Site.Params.design.linkColor }};
+  --header-bg-color: {{ .Site.Params.design.headerBackgroundColor }};
+  --footer-bg-color: {{ .Site.Params.design.footerBackgroundColor }};
+  
+  --font-headings: {{ .Site.Params.design.font.headings }}, sans-serif;
+  --font-body: {{ .Site.Params.design.font.body }}, sans-serif;
+  --font-mono: {{ .Site.Params.design.font.monospace }}, monospace;
+}
+</style>
+
+<!-- Google Analytics -->
+{{ if .Site.Params.analytics.googleAnalyticsID }}
+<!-- We include this directly in baseof.html for proper placement -->
+{{ end }}
+
+<!-- Google Tag Manager -->
+{{ if .Site.Params.analytics.googleTagManagerID }}
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','{{ .Site.Params.analytics.googleTagManagerID }}');</script>
+{{ end }}
+
+<!-- Facebook Pixel -->
+{{ if .Site.Params.analytics.facebookPixelID }}
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '{{ .Site.Params.analytics.facebookPixelID }}');
+fbq('track', 'PageView');
+</script>
+{{ end }}
+
+<!-- Matomo Analytics -->
+{{ if and .Site.Params.analytics.matomoSiteID .Site.Params.analytics.matomoURL }}
+<script>
+  var _paq = window._paq = window._paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="{{ .Site.Params.analytics.matomoURL }}";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '{{ .Site.Params.analytics.matomoSiteID }}']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+{{ end }}

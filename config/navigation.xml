@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Navigation Menu Configuration -->
+<navigation>
+  <!-- Main Navigation Menu -->
+  <menu type="main">
+    <!-- Each item represents a menu entry -->
+    <item>
+      <title>{{menu_item_1_title}}</title>
+      <url>{{menu_item_1_url}}</url>
+      <visible>true</visible>
+    </item>
+    <item>
+      <title>{{menu_item_2_title}}</title>
+      <url>{{menu_item_2_url}}</url>
+      <visible>true</visible>
+    </item>
+    <item>
+      <title>{{menu_item_3_title}}</title>
+      <url>{{menu_item_3_url}}</url>
+      <visible>true</visible>
+    </item>
+    <item>
+      <title>{{menu_item_4_title}}</title>
+      <url>{{menu_item_4_url}}</url>
+      <visible>true</visible>
+    </item>
+    <item>
+      <title>{{menu_item_5_title}}</title>
+      <url>{{menu_item_5_url}}</url>
+      <visible>true</visible>
+    </item>
+  </menu>
+  
+  <!-- Footer Menu (Optional) -->
+  <menu type="footer">
+    <item>
+      <title>{{footer_item_1_title}}</title>
+      <url>{{footer_item_1_url}}</url>
+      <visible>true</visible>
+    </item>
+    <item>
+      <title>{{footer_item_2_title}}</title>
+      <url>{{footer_item_2_url}}</url>
+      <visible>true</visible>
+    </item>
+    <item>
+      <title>{{footer_item_3_title}}</title>
+      <url>{{footer_item_3_url}}</url>
+      <visible>true</visible>
+    </item>
+  </menu>
+</navigation>

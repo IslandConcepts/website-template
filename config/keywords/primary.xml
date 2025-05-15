@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Primary Keywords Configuration -->
+<keywords>
+  <!-- Main topic keywords for content focus -->
+  <category name="core_topics">
+    <keyword>{{core_keyword_1}}</keyword>
+    <keyword>{{core_keyword_2}}</keyword>
+    <keyword>{{core_keyword_3}}</keyword>
+    <keyword>{{core_keyword_4}}</keyword>
+    <keyword>{{core_keyword_5}}</keyword>
+  </category>
+  
+  <!-- People to focus on in content -->
+  <category name="key_people">
+    <keyword>{{person_keyword_1}}</keyword>
+    <keyword>{{person_keyword_2}}</keyword>
+    <keyword>{{person_keyword_3}}</keyword>
+    <keyword>{{person_keyword_4}}</keyword>
+    <keyword>{{person_keyword_5}}</keyword>
+  </category>
+  
+  <!-- Organizations to focus on in content -->
+  <category name="key_organizations">
+    <keyword>{{org_keyword_1}}</keyword>
+    <keyword>{{org_keyword_2}}</keyword>
+    <keyword>{{org_keyword_3}}</keyword>
+    <keyword>{{org_keyword_4}}</keyword>
+    <keyword>{{org_keyword_5}}</keyword>
+  </category>
+  
+  <!-- Events or concepts to focus on -->
+  <category name="key_events">
+    <keyword>{{event_keyword_1}}</keyword>
+    <keyword>{{event_keyword_2}}</keyword>
+    <keyword>{{event_keyword_3}}</keyword>
+    <keyword>{{event_keyword_4}}</keyword>
+    <keyword>{{event_keyword_5}}</keyword>
+  </category>
+  
+  <!-- Used for social media hashtags -->
+  <category name="hashtags">
+    <keyword>{{hashtag_1}}</keyword>
+    <keyword>{{hashtag_2}}</keyword>
+    <keyword>{{hashtag_3}}</keyword>
+    <keyword>{{hashtag_4}}</keyword>
+    <keyword>{{hashtag_5}}</keyword>
+  </category>
+  
+  <!-- Keywords for news article searches -->
+  <category name="news_queries">
+    <keyword>{{news_query_1}}</keyword>
+    <keyword>{{news_query_2}}</keyword>
+    <keyword>{{news_query_3}}</keyword>
+  </category>
+  
+  <!-- API Search query combinations (for GNews, etc) -->
+  <category name="search_queries">
+    <query name="primary">{{primary_query}}</query>
+    <query name="secondary">{{secondary_query}}</query>
+    <query name="tertiary">{{tertiary_query}}</query>
+  </category>
+</keywords>

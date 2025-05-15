@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Social Media Configuration -->
+<social>
+  <!-- Social Media Accounts -->
+  <accounts>
+    <platform>
+      <name>X</name>
+      <url>{{twitter_url}}</url>
+      <icon>/images/x-icon.png</icon>
+      <username>{{twitter_username}}</username>
+      <api_key>{{twitter_api_key}}</api_key>
+      <api_secret>{{twitter_api_secret}}</api_secret>
+      <access_token>{{twitter_access_token}}</access_token>
+      <access_secret>{{twitter_access_secret}}</access_secret>
+      <bearer_token>{{twitter_bearer_token}}</bearer_token>
+      <enabled>true</enabled>
+    </platform>
+    
+    <platform>
+      <name>BlueSky</name>
+      <url>{{bluesky_url}}</url>
+      <icon>/images/bluesky-icon.png</icon>
+      <username>{{bluesky_username}}</username>
+      <password>{{bluesky_password}}</password>
+      <enabled>true</enabled>
+    </platform>
+    
+    <!-- Templates for other platforms (commented out by default) -->
+    <!--
+    <platform>
+      <name>Facebook</name>
+      <url>{{facebook_url}}</url>
+      <icon>/images/facebook-icon.png</icon>
+      <page_id>{{facebook_page_id}}</page_id>
+      <access_token>{{facebook_access_token}}</access_token>
+      <enabled>false</enabled>
+    </platform>
+    
+    <platform>
+      <name>Instagram</name>
+      <url>{{instagram_url}}</url>
+      <icon>/images/instagram-icon.png</icon>
+      <username>{{instagram_username}}</username>
+      <password>{{instagram_password}}</password>
+      <enabled>false</enabled>
+    </platform>
+    
+    <platform>
+      <name>LinkedIn</name>
+      <url>{{linkedin_url}}</url>
+      <icon>/images/linkedin-icon.png</icon>
+      <access_token>{{linkedin_access_token}}</access_token>
+      <company_id>{{linkedin_company_id}}</company_id>
+      <enabled>false</enabled>
+    </platform>
+    -->
+  </accounts>
+  
+  <!-- Social Sharing Settings -->
+  <sharing>
+    <default_hashtags>{{default_hashtags}}</default_hashtags>
+    <posts_per_day>{{posts_per_day}}</posts_per_day>
+    <best_posting_times>{{best_posting_times}}</best_posting_times>
+  </sharing>
+</social>

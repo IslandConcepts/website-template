@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<\!-- 
+    Trends Configuration
+    
+    This file configures how imported trend data is used in content generation.
+    Trend data files are located in /scripts/rtrends/ subdirectories.
+-->
+<trends>
+  <\!-- 
+    Available trend categories 
+    Each category defines:
+    - folder: Subdirectory in scripts/rtrends/ where files are stored
+    - file_pattern: Pattern to match trend files (default: category name_*.xml)
+    - enabled: Whether this trend category is active
+  -->
+  <categories>
+    <category>
+      <name>conspiracy</name>
+      <folder>conspiracy</folder>
+      <file_pattern>conspiracy_*.xml</file_pattern>
+      <enabled>true</enabled>
+      <description>Conspiracy-related trends and discussions</description>
+      <weight>0.35</weight>
+    </category>
+    
+    <category>
+      <name>usnews</name>
+      <folder>usnews</folder>
+      <file_pattern>usnews_*.xml</file_pattern>
+      <enabled>true</enabled>
+      <description>US News trends and topics</description>
+      <weight>0.65</weight>
+    </category>
+  </categories>
+  
+  <\!-- 
+    Content generation settings
+    Controls how trend data is used in content generation
+  -->
+  <content_generation>
+    <\!-- How many trend items to use per article -->
+    <trends_per_article>3</trends_per_article>
+    
+    <\!-- Whether to combine trends from different categories -->
+    <mix_categories>true</mix_categories>
+    
+    <\!-- Minimum interest score to consider a trend worth using (0-100) -->
+    <min_interest_score>50</min_interest_score>
+    
+    <\!-- Tags to apply to trend-based content -->
+    <tags>
+      <tag>trends</tag>
+      <tag>data</tag>
+      <tag>analysis</tag>
+    </tags>
+  </content_generation>
+  
+  <\!-- 
+    External scraper settings
+    (These settings are used by the separate Reddit scraper tool)
+  -->
+  <external_scraper>
+    <\!-- How often to run the external scraper (in hours) -->
+    <interval>12</interval>
+    
+    <\!-- Days to keep trend files before cleanup -->
+    <retention_days>30</retention_days>
+    
+    <\!-- File naming format -->
+    <file_format>{category}_{timestamp}.xml</file_format>
+    
+    <\!-- Timestamp format for filenames -->
+    <timestamp_format>%Y%m%d%H%M%S</timestamp_format>
+  </external_scraper>
+</trends>
+EOF < /dev/null
