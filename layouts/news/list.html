@@ -1,0 +1,131 @@
+{{/* 
+  News List Template (Multi-Column Layout)
+  
+  This template creates a multi-column layout for news content with:
+  - Featured stories section (top stories)
+  - Medium-sized previews
+  - Smaller grid items
+  
+  Configuration Options (set in site config):
+  - featuredCount: Number of featured stories to show (default: 3)
+  - mediumCount: Number of medium-sized previews to show (default: 18)
+  - showNewsTicker: Whether to show the news ticker (default: true)
+*/}}
+
+{{ define "main" }}
+
+{{ $featuredCount := .Site.Params.featuredCount | default 3 }}
+{{ $mediumCount := .Site.Params.mediumCount | default 18 }}
+{{ $showNewsTicker := .Site.Params.showNewsTicker | default true }}
+
+<!-- News Ticker -->
+{{ if $showNewsTicker }}
+  {{ partial "news_ticker.html" . }}
+{{ end }}
+
+<!-- Wrapper for all news content -->
+<div class="news-container">
+
+  {{ $unarchived := where .Pages "Params.archived" "!=" true }}
+  {{ $news := where $unarchived "Section" "news" }}
+  {{ $featured := first $featuredCount $news }}
+  {{ $medium := first $mediumCount (after $featuredCount $news) }}
+  {{ $smaller := after (add $featuredCount $mediumCount) $news }}
+
+  <!-- === LEFT COLUMN (Featured + Smaller) === -->
+  <div class="left-column">
+
+    <!-- === FEATURED === -->
+    <div class="featured-section">
+      <h2 class="mobile-section-heading desktop-hide">Featured Stories</h2>
+      {{ range $featured }}
+      <div class="featured-preview">
+        <a href="{{ .Permalink }}" class="thumbnail-link">
+          <div class="header-image">
+            <img src="{{ .Params.image }}" alt="{{ .Title | safeHTML }} Thumbnail">
+          </div>
+        </a>
+        <div class="preview-content">
+          <h2 class="news-title">
+            <a href="{{ .Permalink }}">{{ .Title | safeHTML }}</a>
+          </h2>
+          <div class="news-meta">
+            {{ .Date | dateFormat "January 2, 2006" }}
+            {{ with .Params.author }} by {{ . }}{{ end }}
+          </div>
+          {{ with .Content | plainify | findRE "[^.?!]+[.?!]" }}
+          <p class="news-summary">
+            {{ index . 0 | safeHTML }}{{ if ge (len .) 2 }} {{ index . 1 | safeHTML }}{{ end }}
+          </p>
+          {{ end }}
+          <div class="preview-tags-container">
+            {{ partial "preview_tags.html" . }}
+          </div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+
+    <!-- === SMALLER GRID === -->
+    <div class="smaller-grid">
+      <h2 class="mobile-section-heading desktop-hide">More Stories</h2>
+      {{ range $smaller }}
+      <div class="grid-item">
+        <a href="{{ .Permalink }}" class="thumbnail-link">
+          <div class="thumbnail">
+            <img src="{{ .Params.image }}" alt="{{ .Title | safeHTML }} Thumbnail">
+          </div>
+        </a>
+        <div class="preview-content">
+          <h4 class="news-title">
+            <a href="{{ .Permalink }}">{{ .Title | safeHTML }}</a>
+          </h4>
+          <div class="news-meta">
+            {{ .Date | dateFormat "January 2, 2006" }}
+            {{ with .Params.author }} by {{ . }}{{ end }}
+          </div>
+          <p class="news-summary">{{ .Params.summary | default (.Summary | truncate 150) | safeHTML }}</p>
+          <div class="preview-tags-container">
+            {{ partial "preview_tags.html" . }}
+          </div>
+        </div>
+      </div>
+      {{ end }}
+    </div>
+
+  </div><!-- /.left-column -->
+
+  <!-- === RIGHT COLUMN: MEDIUM PREVIEWS === -->
+  <div class="medium-previews">
+    <h2 class="mobile-section-heading desktop-hide">Latest Updates</h2>
+    {{ range $medium }}
+    <div class="medium-preview">
+      <a href="{{ .Permalink }}" class="thumbnail-link">
+        <div class="thumbnail">
+          <img src="{{ .Params.image }}" alt="{{ .Title | safeHTML }} Thumbnail">
+        </div>
+      </a>
+      <div class="preview-content">
+        <h3 class="news-title">
+          <a href="{{ .Permalink }}">{{ .Title | safeHTML }}</a>
+        </h3>
+        <div class="news-meta">
+          {{ .Date | dateFormat "January 2, 2006" }}
+          {{ with .Params.author }} by {{ . }}{{ end }}
+        </div>
+        {{ with .Content | plainify | findRE "[^.?!]+[.?!]" }}
+        <p class="news-summary">
+          {{ index . 0 | safeHTML }}{{ if ge (len .) 2 }} {{ index . 1 | safeHTML }}{{ end }}
+        </p>
+        {{ end }}
+        <div class="preview-tags-container">
+          {{ partial "preview_tags.html" . }}
+        </div>
+      </div>
+    </div>
+    {{ end }}
+  </div><!-- /.medium-previews -->
+
+</div><!-- /.news-container -->
+
+{{ end }}

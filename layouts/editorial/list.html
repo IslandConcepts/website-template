@@ -1,0 +1,55 @@
+{{/* 
+  Editorial List Template (Alternating Layout)
+  
+  This template creates an alternating layout for editorial content with:
+  - Thumbnail left, content right pattern
+  - Title, date, author, summary format for each item
+  - Tags display
+  
+  Configuration Options (set in site config):
+  - showNewsTicker: Whether to show the news ticker (default: true)
+  - editorialTitle: Title for the editorial section (default: "Editorial")
+*/}}
+
+{{ define "main" }}
+
+{{ $showNewsTicker := .Site.Params.showNewsTicker | default true }}
+{{ $editorialTitle := .Site.Params.editorialTitle | default "Editorial" }}
+
+<!-- News Ticker -->
+{{ if $showNewsTicker }}
+  {{ partial "news_ticker.html" . }}
+{{ end }}
+
+<div class="alternating-list">
+  <h2 class="mobile-section-heading desktop-hide">{{ $editorialTitle }}</h2>
+  {{ $unarchived := where .Pages "Params.archived" "!=" true }}
+  {{ $all := where $unarchived "Section" "editorial" }}
+  {{ range $index, $p := $all }}
+    <div class="alternating-item">
+      <!-- thumbnail -->
+      <div class="thumbnail">
+        <a href="{{ $p.Permalink }}" class="thumbnail-link">
+          <img src="{{ $p.Params.image }}" alt="{{ $p.Title | safeHTML }} thumbnail">
+        </a>
+      </div>
+      <!-- content -->
+      <div class="content">
+        <h2 class="post-title">
+          <a href="{{ $p.Permalink }}">{{ $p.Title | safeHTML }}</a>
+        </h2>
+        <div class="post-meta">
+          {{ $p.Date | dateFormat "Jan 2, 2006" }}
+          {{ with $p.Params.author }} by {{ . | safeHTML }}{{ end }}
+        </div>
+        {{ with $p.Content | plainify | findRE "[^.?!]+[.?!]" }}
+          <p class="post-summary">{{ index . 0 | safeHTML }}</p>
+        {{ end }}
+        <div class="preview-tags-container">
+          {{ partial "preview_tags.html" $p }}
+        </div>
+      </div>
+    </div>
+  {{ end }}
+</div>
+{{ end }}

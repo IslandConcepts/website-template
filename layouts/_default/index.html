@@ -1,0 +1,85 @@
+{{ define "main" }}
+
+<!-- 
+This is a modular homepage template where you can easily customize:
+1. Banner videos or images
+2. Headline texts
+3. Content sections
+4. Disclaimer text
+-->
+
+<!-- First Banner Section - Can be customized with your own video or image -->
+<div class="splash-section first-banner">
+  <div class="splash-image">
+    <!-- Replace the src URL with your own video URL -->
+    <video autoplay muted loop>
+      <source src="{{ .Site.Params.videos.banner1 | default "https://example.com/path/to/your-video.mp4" }}" type="video/mp4">
+    </video>
+    <!-- Fallback image for browsers that don't support video -->
+    <img class="splash-fallback" src="{{ .Site.Params.images.banner1 | default "/images/banner1-fallback.jpg" }}" alt="Banner fallback image">
+  </div>
+  <div class="splash-overlay desktop-title">
+    {{ .Site.Title | default "YOUR SITE NAME" }}
+    <span class="satirical-disclaimer">{{ .Site.Params.bannerTagline | default "Your custom tagline goes here" }}</span>
+  </div>
+</div>
+
+<!-- Text Block 1 - Customize the content in your site parameters -->
+<section class="text-block">
+  <p>
+    {{ .Site.Params.intro | default "This is your site's introduction paragraph. Customize this text in your site parameters or directly in this template to describe your site's mission and purpose. This text block is designed to capture attention and draw visitors into your content." }}
+  </p>
+</section>
+
+<!-- Second Banner Section - Can be customized with your own video or image -->
+<div class="splash-section">
+  <div class="splash-image">
+    <video autoplay muted loop class="splash-video">
+      <source src="{{ .Site.Params.videos.banner2 | default "https://example.com/path/to/your-second-video.mp4" }}" type="video/mp4">
+    </video>
+    <img src="{{ .Site.Params.images.banner2 | default "/images/banner2-fallback.jpg" }}" alt="Second banner fallback image" class="splash-fallback">
+  </div>
+  <div class="splash-overlay">{{ .Site.Params.banner2Heading | default "SECONDARY HEADLINE" }}</div>
+</div>
+
+<!-- Text Block 2 - Customize the content in your site parameters -->
+<section class="text-block">
+  <p>
+    {{ .Site.Params.midContent | default "This is your site's middle content section. Use this area to expand on your site's purpose, highlight key content areas, or explain what makes your site unique. This block provides context between banner images and keeps visitors engaged." }}
+  </p>
+</section>
+
+<!-- Third Banner Section - Can be customized with your own video or image -->
+<div class="splash-section">
+  <div class="splash-image">
+    <video autoplay muted loop class="splash-video">
+      <source src="{{ .Site.Params.videos.banner3 | default "https://example.com/path/to/your-third-video.mp4" }}" type="video/mp4">
+    </video>
+    <img src="{{ .Site.Params.images.banner3 | default "/images/banner3-fallback.jpg" }}" alt="Third banner fallback image" class="splash-fallback">
+  </div>
+  <div class="splash-overlay">{{ .Site.Params.banner3Heading | default "CALL TO ACTION" }}</div>
+</div>
+
+<!-- Text Block 3 - Customize the content in your site parameters -->
+<section class="text-block">
+  <p>
+    {{ .Site.Params.conclusion | default "This is your site's conclusion paragraph. Use this to summarize your site's value proposition, invite users to explore further, or provide a final compelling message about your content." }}
+  </p>
+  <p class="disclaimer-white">
+    {{ .Site.Params.disclaimer | safeHTML | default "Disclaimer: Customize this disclaimer text as needed. You can <a href='/about/' class='fiction-link'>link to your about page</a> or include any other necessary legal or contextual information." }}
+  </p>
+</section>
+
+<!-- Overlay fix script - helps with banner text positioning -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const overlay = document.querySelector(".splash-overlay");
+    if (overlay) {
+      overlay.style.zIndex = "999";
+      overlay.style.position = "absolute";
+      overlay.parentNode.appendChild(overlay);
+    }
+  });
+</script>
+
+{{ end }}

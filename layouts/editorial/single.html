@@ -1,0 +1,100 @@
+{{/* 
+  Editorial Single Article Template
+  
+  This template creates a single article view with:
+  - Featured image with credit
+  - Author information
+  - Date and last modified
+  - Decorative elements between paragraphs
+  - Tags
+  - Related posts
+  
+  Configuration Options (set in site config):
+  - decorativeIcons: Array of image filenames to use as decorative elements
+  - paragraphsBetweenIcons: Number of paragraphs between decorative icons (default: 3)
+  - relatedSection: Section to pull related content from (default matches current section)
+*/}}
+
+{{ define "main" }}
+
+{{ $paragraphsBetweenIcons := .Site.Params.paragraphsBetweenIcons | default 3 }}
+{{ $relatedSection := .Site.Params.relatedEditorialSection | default "editorial" }}
+
+<article class="post">
+  <header class="post-header">
+    <h1 class="post-title">{{ .Title | safeHTML }}</h1>
+    {{ if .Params.image }}
+      <div class="header-image">
+        <img src="{{ .Params.image }}" alt="{{ .Title | safeHTML }} Featured Image">
+        {{ with .Params.image_credit }}
+           <span class="image-credit">Photo: {{ . }}</span>
+        {{ end }}
+      </div>
+    {{ end }}
+    <div class="post-meta">
+      <div class="post-meta-left">
+        <div class="author-info">
+          {{ $authorName := .Params.author }}
+          {{ $authorData := index (where site.Data.authors.authors "name" $authorName) 0 }}
+          {{ if $authorData }}
+            {{ $authorThumb := $authorData.thumbnail }}
+            <img src="{{ $authorThumb }}" alt="{{ $authorName }}" class="author-thumbnail">
+            <div class="author-details">
+              <p class="post-author">by {{ $authorName }}</p>
+            </div>
+          {{ else }}
+            <p class="post-author">by {{ $authorName }}</p>
+          {{ end }}
+        </div>
+        <p class="post-date">
+          {{ .Date.Format "January 2, 2006" }}
+          {{ if .Lastmod }} Updated {{ .Lastmod.Format "3:04 p.m." }} ET{{ end }}
+        </p>
+      </div>
+      <div class="post-meta-right">
+        {{ partial "social_share.html" . }}
+      </div>
+    </div>
+  </header>
+
+  <div class="post-content">
+    {{/* Get decorative icons from site config, or use defaults */}}
+    {{ $icons := .Site.Params.decorativeIcons | default (slice
+        "DHS_small.jpg"
+        "CIA_small.jpg"
+        "SF_small.jpg"
+        "DIA_small.jpg"
+        "FBI_small.jpg"
+       )}}
+
+    {{/* grab the raw HTML, split into paragraphs */}}
+    {{ $raw := .Content | safeHTML }}
+    {{ $chunks := split $raw "</p>" }}
+
+    {{ range $i, $p := $chunks }}
+      {{- if ne (len $p) 0 }}
+        {{- printf "%s</p>" $p | safeHTML }}
+        {{/* after every nth paragraph (where n is paragraphsBetweenIcons), but not after the last */}}
+        {{ if and (eq (mod (add $i 1) $paragraphsBetweenIcons) 0) (lt (add $i 1) (len $chunks)) }}
+          {{ $icon := index $icons (mod $i (len $icons)) }}
+          <div class="fancy-asterisk">
+            <img src="{{ printf "/images/%s" $icon | relURL }}" alt="*">
+          </div>
+        {{ end }}
+      {{- end }}
+    {{ end }}
+  </div>
+  
+  {{ partial "article_tags.html" . }}
+</article>
+
+{{/* Related Posts */}}
+{{ $current := . }}
+{{ $relatedPages := where .Site.RegularPages "Section" $relatedSection }}
+{{ $relatedPosts := where $relatedPages ".Permalink" "!=" $current.Permalink | first 5 }}
+
+{{ if gt (len $relatedPosts) 0 }}
+  {{ partial "related_posts.html" (dict "relatedPosts" $relatedPosts "Site" .Site) }}
+{{ end }}
+
+{{ end }}

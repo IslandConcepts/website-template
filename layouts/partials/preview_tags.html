@@ -1,0 +1,19 @@
+{{/* 
+  Preview Tags Partial
+  
+  This partial displays tags for content previews in list views.
+  It's designed to show a limited number of tags (default: 1) to save space.
+  
+  Configuration Options (set in site config):
+  - previewTagSections: Array of sections where tags should be shown (default: ["news", "editorial"])
+  - previewTagCount: Number of tags to show in previews (default: 1)
+*/}}
+
+{{ $showInSections := .Site.Params.previewTagSections | default (slice "news" "editorial") }}
+{{ $tagCount := .Site.Params.previewTagCount | default 1 }}
+
+{{ if and .Params.tags (in $showInSections .Section) }}
+  {{ range first $tagCount .Params.tags }}
+    <a href="{{ printf "/tags/%s" (. | urlize) | relURL }}" class="preview-tag">{{ . }}</a>
+  {{ end }}
+{{ end }}

@@ -1,0 +1,34 @@
+{{/* 
+  Related Posts Partial
+  
+  This partial displays related content at the bottom of articles.
+  It can be configured to show related content from specific sections
+  and customize the number of items shown.
+  
+  Configuration Options (set in site config):
+  - relatedPostsCount: Number of related posts to show (default: 5)
+  - relatedPostsTitle: Title for the related posts section (default: "More Articles")
+*/}}
+
+{{ $relatedPostsCount := .Site.Params.relatedPostsCount | default 5 }}
+{{ $relatedPostsTitle := .Site.Params.relatedPostsTitle | default "More Articles" }}
+
+{{ if .relatedPosts }}
+<div class="related-posts">
+  <h3>{{ $relatedPostsTitle }}</h3>
+  <div class="related-posts-grid">
+    {{ range .relatedPosts }}
+      <div class="related-post">
+        <a href="{{ .Permalink }}">
+          {{ if .Params.image }}
+            <div class="related-thumbnail">
+              <img src="{{ .Params.image }}" alt="{{ .Title | safeHTML }} Thumbnail">
+            </div>
+          {{ end }}
+          <p class="related-title">{{ .Title | safeHTML }}</p>
+        </a>
+      </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

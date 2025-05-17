@@ -1,0 +1,52 @@
+{{ define "main" }}
+
+{{ partial "breadcrumbs.html" . }}
+
+<article class="post">
+  {{ if .Params.archived }}
+  <div class="archived-notice">
+    <span class="archived-badge">Archived</span>
+    <p>This content has been archived and is provided for historical reference.</p>
+  </div>
+  {{ end }}
+
+  <header class="post-header">
+    <h1 class="post-title">{{ .Title | safeHTML }}</h1>
+    
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="left" style="padding-top: 10px; padding-bottom: 15px;">
+          {{ partial "social_share.html" . }}
+        </td>
+      </tr>
+    </table>
+    
+    {{ if .Params.image }}
+      <div class="header-image">
+        <img src="{{ .Params.image | safeURL }}" alt="{{ .Title | safeHTML }} Featured Image">
+      </div>
+    {{ end }}
+    <div class="post-meta">
+      <div class="post-meta-left">
+        <p class="post-author">by {{ .Params.author | safeHTML }}</p>
+        <p class="post-date">
+          {{ .Date.Format "January 2, 2006" }}
+          {{ if .Lastmod }} updated {{ .Lastmod.Format "3:04 p.m." }}{{ end }}
+        </p>
+      </div>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    {{ .Content | safeHTML }}
+  </div>
+</article>
+
+{{ $current := . }}
+{{/* Include related pages from posts, news, and trends */}}
+{{ $relatedPages := where .Site.RegularPages "Section" "in" (slice "posts" "news" "trends") }}
+{{ $relatedPosts := where $relatedPages ".Permalink" "!=" $current.Permalink | first 5 }}
+
+{{ partial "related_posts.html" (dict "relatedPosts" $relatedPosts) }}
+
+{{ end }}

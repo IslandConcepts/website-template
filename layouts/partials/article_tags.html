@@ -1,0 +1,18 @@
+{{/* 
+  Article Tags Partial
+  
+  This partial displays all tags at the bottom of single article views.
+  
+  Configuration Options (set in site config):
+  - articleTagSections: Array of sections where tags should be shown (default: ["news", "editorial"])
+*/}}
+
+{{ $showInSections := .Site.Params.articleTagSections | default (slice "news" "editorial") }}
+
+{{ if and .Params.tags (in $showInSections .Section) }}
+<div class="article-tags">
+  {{ range .Params.tags }}
+    <a href="{{ printf "/tags/%s" (. | urlize) | relURL }}" class="article-tag">{{ . }}</a>
+  {{ end }}
+</div>
+{{ end }}

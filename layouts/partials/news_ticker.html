@@ -1,0 +1,70 @@
+{{/* 
+  News Ticker Partial
+  
+  This partial creates a horizontally scrolling news ticker that displays
+  recent headlines from specified sections.
+  
+  Configuration Options (set in site config):
+  - tickerSections: Array of sections to include in the ticker (default: ["news"])
+  - tickerItemCount: Number of items to show in the ticker (default: 8)
+*/}}
+
+{{ $tickerSections := .Site.Params.tickerSections | default (slice "news") }}
+{{ $tickerItemCount := .Site.Params.tickerItemCount | default 8 }}
+
+{{ $tickerItems := where .Site.RegularPages "Section" "in" $tickerSections }}
+{{ $tickerItems = where $tickerItems "Params.archived" "!=" true }}
+{{ $tickerItems = first $tickerItemCount (sort $tickerItems "Date" "desc") }}
+
+<div class="news-ticker-container">
+  <div class="news-ticker">
+    <div class="news-ticker-content">
+      {{ range $index, $article := $tickerItems }}
+        {{/* Process headline: use shortTitle if available, then tickerTitle, or use title with headline processor */}}
+        {{ $displayTitle := "" }}
+        {{ if .Params.shortTitle }}
+          {{ $displayTitle = .Params.shortTitle }}
+        {{ else if .Params.tickerTitle }}
+          {{ $displayTitle = .Params.tickerTitle }}
+        {{ else if isset $.Site.Params "useHeadlineProcessor" }}
+          {{ if $.Site.Params.useHeadlineProcessor }}
+            {{ $displayTitle = partial "headline_processor.html" .Title }}
+          {{ else }}
+            {{ $displayTitle = .Title }}
+          {{ end }}
+        {{ else }}
+          {{ $displayTitle = .Title }}
+        {{ end }}
+        
+        <span class="ticker-item">
+          <a href="{{ .Permalink }}">{{ $displayTitle | safeHTML }}</a>
+        </span>
+        <span class="ticker-separator">•</span>
+      {{ end }}
+      
+      {{/* Duplicate the full set to ensure seamless loop */}}
+      {{ range $index, $article := $tickerItems }}
+        {{/* Process headline: use shortTitle if available, then tickerTitle, or use title with headline processor */}}
+        {{ $displayTitle := "" }}
+        {{ if .Params.shortTitle }}
+          {{ $displayTitle = .Params.shortTitle }}
+        {{ else if .Params.tickerTitle }}
+          {{ $displayTitle = .Params.tickerTitle }}
+        {{ else if isset $.Site.Params "useHeadlineProcessor" }}
+          {{ if $.Site.Params.useHeadlineProcessor }}
+            {{ $displayTitle = partial "headline_processor.html" .Title }}
+          {{ else }}
+            {{ $displayTitle = .Title }}
+          {{ end }}
+        {{ else }}
+          {{ $displayTitle = .Title }}
+        {{ end }}
+        
+        <span class="ticker-item">
+          <a href="{{ .Permalink }}">{{ $displayTitle | safeHTML }}</a>
+        </span>
+        <span class="ticker-separator">•</span>
+      {{ end }}
+    </div>
+  </div>
+</div>

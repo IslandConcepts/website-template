@@ -1,0 +1,94 @@
+{{/* 
+  Social Share Partial
+  
+  This partial provides social media sharing buttons for content.
+  It uses standard sharing links for popular platforms and includes
+  a copy link button with JavaScript functionality.
+  
+  Configuration Options (set in site config):
+  - enabledSharePlatforms: Array of platforms to enable (default: all)
+    Options: "twitter", "facebook", "bluesky", "email", "copy"
+*/}}
+
+{{ $pageUrl := .Permalink }}
+{{ $pageTitle := .Title }}
+{{ $siteName := .Site.Title }}
+{{ $enabledPlatforms := .Site.Params.enabledSharePlatforms | default (slice "twitter" "facebook" "bluesky" "email" "copy") }}
+
+<!-- Using an HTML table for maximum compatibility -->
+<table border="0" cellpadding="0" cellspacing="0" class="social-share-buttons">
+  <tr>
+    <!-- X (Twitter) -->
+    {{ if in $enabledPlatforms "twitter" }}
+    <td style="padding-right: 12px;">
+      <a href="https://twitter.com/intent/tweet?url={{ $pageUrl | safeURL }}&text={{ $pageTitle | safeURL }}"
+         target="_blank" rel="noopener" class="social-icon twitter-icon" title="Share on Twitter">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#777777">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+    </td>
+    {{ end }}
+    
+    <!-- Facebook -->
+    {{ if in $enabledPlatforms "facebook" }}
+    <td style="padding-right: 12px;">
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ $pageUrl | safeURL }}" 
+         target="_blank" rel="noopener" class="social-icon facebook-icon" title="Share on Facebook">
+        <img src="/images/facebook_Logo.png" alt="Facebook" width="18" height="18">
+      </a>
+    </td>
+    {{ end }}
+    
+    <!-- Bluesky -->
+    {{ if in $enabledPlatforms "bluesky" }}
+    <td style="padding-right: 12px;">
+      <a href="https://bsky.app/intent?text={{ $pageTitle | safeURL }}%0A%0A{{ $pageUrl | safeURL }}" 
+         target="_blank" rel="noopener" class="social-icon bluesky-icon" title="Share on Bluesky">
+        <img src="/images/bluesky-icon-black.png" alt="Bluesky" width="18" height="18">
+      </a>
+    </td>
+    {{ end }}
+    
+    <!-- Email -->
+    {{ if in $enabledPlatforms "email" }}
+    <td style="padding-right: 12px;">
+      <a href="mailto:?subject={{ $pageTitle | safeURL }}&body={{ .Summary | safeURL }}%0A%0A{{ $pageUrl | safeURL }}" 
+         class="social-icon email-icon" title="Share via Email">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#777777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+        </svg>
+      </a>
+    </td>
+    {{ end }}
+    
+    <!-- Copy Link -->
+    {{ if in $enabledPlatforms "copy" }}
+    <td>
+      <button onclick="copyArticleLink()" class="copy-link-button" title="Copy link to clipboard">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#777777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+        </svg>
+      </button>
+      <div id="copyTooltip" class="copy-tooltip">Link copied!</div>
+    </td>
+    {{ end }}
+  </tr>
+</table>
+
+<script>
+function copyArticleLink() {
+  navigator.clipboard.writeText(window.location.href).then(function() {
+    // Show tooltip
+    var tooltip = document.getElementById('copyTooltip');
+    tooltip.style.display = 'block';
+    
+    // Hide tooltip after 2 seconds
+    setTimeout(function() {
+      tooltip.style.display = 'none';
+    }, 2000);
+  });
+}
+</script>
