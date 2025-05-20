@@ -1,0 +1,15 @@
+# Handle URLs with special characters
+/*,* /:splat: 301!
+/*;* /:splat: 301!
+/*'* /:splat: 301!
+/*&* /:splat: 301!
+
+# Ensure all section paths have trailing slashes - use force=false to prevent loops
+/news /news/ 301
+/posts /posts/ 301
+/tags /tags/ 301
+/about /about/ 301
+/archive /archive/ 301
+
+# Fallback to homepage for any other errors
+/*/404 / 301!
