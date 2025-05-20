@@ -1,0 +1,33 @@
+{
+  "date": "20250519",
+  "generation": {
+    "started_at": "2025-05-19T23:29:55.615985",
+    "completed_at": "2025-05-19T23:39:10.161362",
+    "duration_seconds": 554.545377,
+    "initial_pool_size": 12,
+    "unique_tweets_generated": 0,
+    "duplicates_filtered": 36,
+    "uniqueness_threshold": 0.6,
+    "temperature_settings": {
+      "hashtag": 0.5,
+      "commentary": 0.8,
+      "article": 0.85,
+      "absurd": 0.7,
+      "leak": 0.85
+    },
+    "tweet_types": {
+      "article": 0,
+      "signal_leak": 0,
+      "commentary": 0,
+      "absurd_take": 0
+    }
+  },
+  "posting": {
+    "platforms": {}
+  },
+  "efficiency": {
+    "generation_ratio": 0.0,
+    "posting_ratio": 0.0,
+    "overall_efficiency": 0.0
+  }
+}
