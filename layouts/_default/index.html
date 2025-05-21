@@ -8,77 +8,85 @@ This is a modular homepage template where you can easily customize:
 4. Disclaimer text
 -->
 
-<!-- First Banner Section - Can be customized with your own video or image -->
+<!-- First Banner Section - Video Only Without Overlay Text -->
 <div class="splash-section first-banner">
   <div class="splash-image">
     <!-- Replace the src URL with your own video URL -->
-    <video autoplay muted loop>
+    <video autoplay muted loop playsinline>
       <source src="{{ .Site.Params.videos.banner1 | default "https://example.com/path/to/your-video.mp4" }}" type="video/mp4">
     </video>
     <!-- Fallback image for browsers that don't support video -->
     <img class="splash-fallback" src="{{ .Site.Params.images.banner1 | default "/images/banner1-fallback.jpg" }}" alt="Banner fallback image">
   </div>
-  <div class="splash-overlay desktop-title">
-    {{ .Site.Title | default "YOUR SITE NAME" }}
-    <span class="satirical-disclaimer">{{ .Site.Params.bannerTagline | default "Your custom tagline goes here" }}</span>
-  </div>
 </div>
 
-<!-- Text Block 1 - Customize the content in your site parameters -->
-<section class="text-block">
-  <p>
-    {{ .Site.Params.intro | default "This is your site's introduction paragraph. Customize this text in your site parameters or directly in this template to describe your site's mission and purpose. This text block is designed to capture attention and draw visitors into your content." }}
-  </p>
+<!-- Title Section Beneath First Video -->
+<section class="title-section">
+  <h1 class="site-title">CRINGEWORTHY</h1>
+  <p class="site-tagline">So bad you wish it weren't true</p>
 </section>
 
-<!-- Second Banner Section - Can be customized with your own video or image -->
+<!-- Second Banner Section - Video Only Without Overlay Text -->
 <div class="splash-section">
   <div class="splash-image">
-    <video autoplay muted loop class="splash-video">
+    <video autoplay muted loop playsinline class="splash-video">
       <source src="{{ .Site.Params.videos.banner2 | default "https://example.com/path/to/your-second-video.mp4" }}" type="video/mp4">
     </video>
     <img src="{{ .Site.Params.images.banner2 | default "/images/banner2-fallback.jpg" }}" alt="Second banner fallback image" class="splash-fallback">
   </div>
-  <div class="splash-overlay">{{ .Site.Params.banner2Heading | default "SECONDARY HEADLINE" }}</div>
 </div>
 
-<!-- Text Block 2 - Customize the content in your site parameters -->
-<section class="text-block">
-  <p>
-    {{ .Site.Params.midContent | default "This is your site's middle content section. Use this area to expand on your site's purpose, highlight key content areas, or explain what makes your site unique. This block provides context between banner images and keeps visitors engaged." }}
+<!-- Second Title Section -->
+<section class="title-section second-title">
+  <h2 class="banner-heading">AWKWARDNESS YOU CAN'T UNSEE</h2>
+  <p class="banner-description">
+    Cringeworthy is a digital hellscape of the dark, the grotesque, and the hilariously disturbing, where viral cringe meets unspeakable horror, and humanity's most messed-up moments are remembered.
   </p>
 </section>
 
-<!-- Third Banner Section - Can be customized with your own video or image -->
+<!-- Third Banner Section - Video Only Without Overlay Text -->
 <div class="splash-section">
   <div class="splash-image">
-    <video autoplay muted loop class="splash-video">
+    <video autoplay muted loop playsinline class="splash-video">
       <source src="{{ .Site.Params.videos.banner3 | default "https://example.com/path/to/your-third-video.mp4" }}" type="video/mp4">
     </video>
     <img src="{{ .Site.Params.images.banner3 | default "/images/banner3-fallback.jpg" }}" alt="Third banner fallback image" class="splash-fallback">
   </div>
-  <div class="splash-overlay">{{ .Site.Params.banner3Heading | default "CALL TO ACTION" }}</div>
 </div>
 
-<!-- Text Block 3 - Customize the content in your site parameters -->
-<section class="text-block">
-  <p>
-    {{ .Site.Params.conclusion | default "This is your site's conclusion paragraph. Use this to summarize your site's value proposition, invite users to explore further, or provide a final compelling message about your content." }}
+<!-- Third Title Section -->
+<section class="title-section third-title">
+  <h2 class="banner-heading">DARKNESS YOU CAN'T SHAKE OFF</h2>
+  <p class="banner-description">
+    We gather the worst of the real world and filter it through the dark subconcious of the internet. From blood-curdling mysteries to embarrassing moments caught on film, from conspiracy-laden rants to real-life horror stories ripped from the headlines, we deliver content that's as addictive as it is unsettling. We're not here to comfort you; we're here to provoke, disturb, and entertain. If it's cursed, if it's shameful, if it's so bad you wish it weren't true—then it belongs here.
   </p>
+  <p class="final-tagline">GET READY TO GET WEIRD</p>
+</section>
+
+<!-- Disclaimer Section -->
+<section class="text-block disclaimer-section">
   <p class="disclaimer-white">
-    {{ .Site.Params.disclaimer | safeHTML | default "Disclaimer: Customize this disclaimer text as needed. You can <a href='/about/' class='fiction-link'>link to your about page</a> or include any other necessary legal or contextual information." }}
+    Disclaimer: This content is inspired by real events while names have been changed and details dramatized for entertainment purposes. These stories should not be mistaken for factual reporting. Viewer discretion is advised.
   </p>
 </section>
 
 <!-- Overlay fix script - helps with banner text positioning -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const overlay = document.querySelector(".splash-overlay");
-    if (overlay) {
+    const overlays = document.querySelectorAll(".splash-overlay");
+    overlays.forEach(overlay => {
       overlay.style.zIndex = "999";
       overlay.style.position = "absolute";
       overlay.parentNode.appendChild(overlay);
-    }
+    });
+    
+    // Ensure video playback
+    const videos = document.querySelectorAll("video");
+    videos.forEach(video => {
+      video.play().catch(error => {
+        console.log("Video autoplay prevented:", error);
+      });
+    });
   });
 </script>
 
