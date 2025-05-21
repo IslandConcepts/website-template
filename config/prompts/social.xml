@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Prompt Templates for Social Media Posts -->
+<prompts>
+  <twitter_prompt>
+    Create a short, engaging tweet about {{article_title}} that would make people stop scrolling and click through to read more. The tweet should have a shocking, bizarre, or mysterious element that leaves people wanting to know the full story.
+
+    Follow these patterns from our most successful tweets:
+    - "New York man sentenced for fatally stabbing his pregnant wife: Marcus Riley, 32, got life without parole after murdering his expectant spouse during a 2 AM dispute."
+    - "Christmas Miracle! Severed Leg Hops to Hospital: After a logging accident on Christmas Eve, Alan Murray's detached leg 'hopped' down a snowbank into a snowplow's path."
+    - "You Won't Believe the Transformation After this Obese Man took Ozempic!: Tom Harris went from 480 lbs to 260 lbs in six months on Ozempic."
+    - "Titanic Survivors Found on Board!: Salvagers inspecting an old freighter discovered a waterlogged lifejacket and passenger diary from Titanic survivors."
+    
+    Keep it under 280 characters and include relevant hashtags. The tone should be a mix of shocking news and tabloid sensationalism. Include specific, vivid details wherever possible. Never use double quotes - use single quotes instead.
+  </twitter_prompt>
+  
+  <bluesky_prompt>
+    Create an engaging social media post for Bluesky about {{article_title}} using our signature 'shocking but intriguing' style. The post should use our pattern of dramatic headline followed by specific, vivid details that seem almost too strange to be true.
+
+    Follow these examples from our viral posts:
+    - "News Reporter Eaten Alive by 30 ft Crocodile: Laura Chen vanished while filming in the Mekong Delta. Recovered footage shows her spotlight startling a 30 ft crocodile."
+    - "LA Quake Opens Gates of Hell: A 7.8 magnitude quake split Griffith Park, releasing sulfurous smoke and an underground roar. Locals dubbed it 'Hell's Mouth.'"
+    - "After receiving heart transplant woman's personality changes: Post-op, 29-year-old Mia Torres awoke craving oysters, salsa dancing, and an aversion to cabbage."
+    - "This is what happens when you don't sleep for 21 days: In a medical study, Jason Wu stayed awake for 21 nights. By night 18 he suffered living nightmares."
+    
+    The post can be up to 300 characters and should include relevant hashtags. Make the reader feel they MUST click to see the full story or they'll miss out on something incredibly bizarre. Always use single quotes, never double quotes.
+  </bluesky_prompt>
+</prompts>

@@ -3,60 +3,702 @@
 <keywords>
   <!-- Main topic keywords for content focus -->
   <category name="core_topics">
-    <keyword>{{core_keyword_1}}</keyword>
-    <keyword>{{core_keyword_2}}</keyword>
-    <keyword>{{core_keyword_3}}</keyword>
-    <keyword>{{core_keyword_4}}</keyword>
-    <keyword>{{core_keyword_5}}</keyword>
+    <keyword>high school humiliation</keyword>
+    <keyword>social media fails</keyword>
+    <keyword>workplace humiliation</keyword>
+    <keyword>family secrets</keyword>
+    <keyword>bizarre rituals</keyword>
+    <keyword>abduction from shopping mall</keyword>
+    <keyword>suburban nightmares</keyword>
+    <keyword>college dorm hauntings</keyword>
+    <keyword>beauty obsessions</keyword>
+    <keyword>public shaming</keyword>
+    <keyword>teddy bears</keyword>
+    <keyword>tanning obsession</keyword>
+    <keyword>alien abduction</keyword>
+    <keyword>near death experience</keyword>
+    <keyword>terrible date</keyword>
+    <keyword>workplace harassment</keyword>
+    <keyword>home invasion</keyword>
+    <keyword>internet stalking</keyword>
+    <keyword>faking death</keyword>
+    <keyword>faking illness</keyword>
+    <keyword>kidnapping</keyword>
+    <keyword>medical malpractice</keyword>
+    <keyword>exotic disease</keyword>
+    <keyword>parasite</keyword>
+    <keyword>food poisoning</keyword>
+    <keyword>dark perversion</keyword>
+    <keyword>body transformation</keyword>
+    <keyword>body horror</keyword>
+    <keyword>mysterious disappearance</keyword>
+    <keyword>dad is a monster</keyword>
+    <keyword>elder abuse</keyword>
+    <keyword>cannibalism</keyword>
+    <keyword>accidentally eating rodent</keyword>
+    <keyword>accidentally eating insect</keyword>
+    <keyword>spider infestation</keyword>
+    <keyword>vacation gone wrong</keyword>
+    <keyword>girls gone wild</keyword>
+    <keyword>female bullies</keyword>
+    <keyword>emotional abuse</keyword>
+    <keyword>psychological abuse</keyword>
+    <keyword>psychopathic girlfriend</keyword>
+    <keyword>animals attack</keyword>
+    <keyword>torturing pet</keyword>
+    <keyword>murdering pet</keyword>
+    <keyword>influencer fraud</keyword>
+    <keyword>deadly memes</keyword>
+    <keyword>deadly internet trends</keyword>
+    <keyword>virality</keyword>
+    <keyword>eaten alive</keyword>
+    <keyword>buried alive</keyword>
+    <keyword>inappropriate relations with animals</keyword>
+    <keyword>inappropriate relations with sibling</keyword>
+    <keyword>inappropriate social interaction</keyword>
+    <keyword>inappropriate behavior at wedding</keyword>
+    <keyword>offensive behavior at work</keyword>
+    <keyword>friend's troubling pattern of behavior</keyword>
+    <keyword>a string of very bad luck</keyword>
+    <keyword>polyamory</keyword>
+    <keyword>hair growing out of control</keyword>
+    <keyword>dental mishap</keyword>
+    <keyword>people who resemble animals</keyword>
+    <keyword>demon possession</keyword>
+    <keyword>sudden personalitychange</keyword>
+    <keyword>split personalities</keyword>
+    <keyword>rare mental disorders</keyword>
+    <keyword>bad psychedelic trips</keyword>
+    <keyword>bad art</keyword>
+    <keyword>funeral mishaps</keyword>
+    <keyword>grocery store horrors</keyword>
+    <keyword>cursed family heirlooms</keyword>
+    <keyword>office party disasters</keyword>
+    <keyword>insidious appliances</keyword>
+    <keyword>neighbor's creepy hobby</keyword>
+    <keyword>subway nightmares</keyword>
+    <keyword>failed reality TV stunts</keyword>
+    <keyword>poisoned potluck dishes</keyword>
+    <keyword>elevator entrapment</keyword>
+    <keyword>backyard discoveries</keyword>
+    <keyword>church scandals</keyword>
+    <keyword>cursed thrift store discovery</keyword>
+    <keyword>sleepwalking horrors</keyword>
+    <keyword>tainted beauty products</keyword>
+    <keyword>bad processed food</keyword>
+    <keyword>evil board games</keyword>
+    <keyword>mall Santa scandals</keyword>
+    <keyword>parasitic neighbors</keyword>
+    <keyword>parasitic friends</keyword>
+    <keyword>failed influencer collabs</keyword>
+    <keyword>haunted Zoom calls</keyword>
+    <keyword>tainted water supply</keyword>
+    <keyword>obscene cultural appropriation</keyword>
+    <keyword>horrific ayahuasca journey</keyword>
+    <keyword>library hauntings</keyword>
+    <keyword>dog park conspiracies</keyword>
+    <keyword>fast food horrors</keyword>
+    <keyword>cursed family photos</keyword>
+    <keyword>gym locker room scandals</keyword>
+    <keyword>haunted vending machines</keyword>
+    <keyword>suburban cult initiations</keyword>
+    <keyword>cursed karaoke nights</keyword>
+    <keyword>tainted birthday cakes</keyword>
+    <keyword>haunted laundromats</keyword>
+    <keyword>office printer curses</keyword>
+    <keyword>cursed garage sales</keyword>
+    <keyword>public restroom horrors</keyword>
+    <keyword>tainted Halloween candy</keyword>
+    <keyword>cursed dating apps</keyword>
+    <keyword>PTA meeting chaos unravelling into violence</keyword>
+    <keyword>parricide</keyword>
+    <keyword>infanticide</keyword>
+    <keyword>child takes psychedelics</keyword>
+    <keyword>weed gummy overdoses</keyword>
+    <keyword>bath salts</keyword>
+    <keyword>tainted pet food</keyword>
+    <keyword>cursed grocery coupons</keyword>
+    <keyword>barbershop hauntings</keyword>
+    <keyword>cursed commute</keyword>
+    <keyword>tainted fitness trackers</keyword>
+    <keyword>haunted nail salons</keyword>
+    <keyword>occult book clubs</keyword>
+    <keyword>suburban satanists</keyword>
+    <keyword>tainted vending machines</keyword>
+    <keyword>feminist cabbal</keyword>
+    <keyword>coven of witches</keyword>
+    <keyword>carpool ordeal</keyword>
+    <keyword>DMV nightmare</keyword>
+    <keyword>IRS audit from hell</keyword>
+    <keyword>surgery without anaesthesia</keyword>
+    <keyword>awkward baby showers</keyword>
+    <keyword>tainted coffee shops</keyword>
+    <keyword>neighbor feud gets scary</keyword>
+    <keyword>poisoning a pet</keyword>
+    <keyword>online mob</keyword>
+    <keyword>international conspiracy</keyword>
+    <keyword>experiments on humans</keyword>
+    <keyword>identity theft</keyword>
+    <keyword>viral meltdown</keyword>
+    <keyword>public proposal fails</keyword>
+    <keyword>karaoke nightmares</keyword>
+    <keyword>live-stream disasters</keyword>
+    <keyword>crowdfunding scams</keyword>
+    <keyword>open mic horror</keyword>
+    <keyword>reality show breakdowns</keyword>
+    <keyword>bad cosplay</keyword>
+    <keyword>fitness obsession gone wrong</keyword>
+    <keyword>extreme mukbang mishaps</keyword>
+    <keyword>VR terror</keyword>
+    <keyword>AI gone haywire</keyword>
+    <keyword>robot uprising scare</keyword>
+    <keyword>cryptocurrency collapse</keyword>
+    <keyword>pump and dump schemes</keyword>
+    <keyword>crowdsourced stupidity</keyword>
+    <keyword>failed protest</keyword>
+    <keyword>political gaffes</keyword>
+    <keyword>diplomatic disasters</keyword>
+    <keyword>celebrity meltdowns</keyword>
+    <keyword>award show embarrassments</keyword>
+    <keyword>fashion disasters</keyword>
+    <keyword>tattoo regrets</keyword>
+    <keyword>DIY gone wrong</keyword>
+    <keyword>home makeover fails</keyword>
+    <keyword>gardening horror stories</keyword>
+    <keyword>BBQ gone wrong</keyword>
+    <keyword>camping misadventures</keyword>
+    <keyword>theme park nightmares</keyword>
+    <keyword>airplane fails</keyword>
+    <keyword>bus trip blunders</keyword>
+    <keyword>Uber horror stories</keyword>
+    <keyword>taxidermy tragedies</keyword>
+    <keyword>breakup backlash</keyword>
+    <keyword>ghosted on deadline</keyword>
+    <keyword>heckled on stage</keyword>
+    <keyword>open relationship chaos</keyword>
+    <keyword>honeymoon disasters</keyword>
+    <keyword>infamous break-ins</keyword>
+    <keyword>lost at sea</keyword>
+    <keyword>mountain rescue fails</keyword>
+    <keyword>pet rescue gone wrong</keyword>
+    <keyword>allergic reactions</keyword>
+    <keyword>viral recipe disasters</keyword>
+    <keyword>cocktail catastrophes</keyword>
+    <keyword>cursed text threads</keyword>
+    <keyword>autocorrect disasters</keyword>
+    <keyword>wrong number confessions</keyword>
+    <keyword>mystery stains</keyword>
+    <keyword>haunted earworms</keyword>
+    <keyword>viral hoaxes exposed</keyword>
+    <keyword>autistic kids with telepathy</keyword>
+    <keyword>CIA experiments with acid</keyword>
+    <keyword>children faking psychosis</keyword>
+    <keyword>children faking illness</keyword>
+    <keyword>sleeping sickness</keyword>
+    <keyword>mysterious chronic fatigue</keyword>
+    <keyword>extreme reculusion</keyword>
+    <keyword>animals acquiring language</keyword>
+    <keyword>man trapped in cave for years</keyword>
+    <keyword>feral child lives on bugs</keyword>
+    <keyword>child stuck in fridge</keyword>
+    <keyword>child trapped in well</keyword>
+    <keyword>cruel children</keyword>
+    <keyword>fitness obsession gone wrong</keyword>
+    <keyword>extreme mukbang mishaps</keyword>
+    <keyword>eating contest</keyword>
+    <keyword>creepy beauty pageant</keyword>
+    <keyword>disturbing content</keyword>
+    <keyword>disturbing contest</keyword>
+    <keyword>support group for extremely unusual disorder</keyword>
+    <keyword>deadly pollution</keyword>
+    <keyword>antibiotic resistant bacteria</keyword>
+    <keyword>con artist</keyword>
+    <keyword>father with hidden identity</keyword>
+    <keyword>black mold kills family</keyword>
+    <keyword>babysitter blackmail</keyword>
+    <keyword>babysitter brainwashes kids</keyword>
+    <keyword>therapist brainwashes kids</keyword>
+    <keyword>students brainwashed</keyword>
+    <keyword>body modification</keyword>
+    <keyword>weird weekend getaway</keyword>
+    <keyword>hidden cameras at airbnb</keyword>
+    <keyword>hidden cameras at motel</keyword>
+    <keyword>VR terror</keyword>
+    <keyword>AI gone haywire</keyword>
+    <keyword>robot uprising scare</keyword>
+    <keyword>cryptocurrency collapse</keyword>
+    <keyword>pump and dump schemes</keyword>
+    <keyword>crowdsourced stupidity</keyword>
+    <keyword>failed protest</keyword>
+    <keyword>political gaffes</keyword>
+    <keyword>diplomatic disasters</keyword>
+    <keyword>celebrity meltdowns</keyword>
+    <keyword>award show embarrassments</keyword>
+    <keyword>fashion disasters</keyword>
+    <keyword>tattoo regrets</keyword>
+    <keyword>DIY gone wrong</keyword>
+    <keyword>home makeover fails</keyword>
+    <keyword>gardening horror stories</keyword>
+    <keyword>BBQ gone wrong</keyword>
+    <keyword>camping misadventures</keyword>
+    <keyword>theme park nightmares</keyword>
+    <keyword>airplane fails</keyword>
+    <keyword>bus trip blunders</keyword>
+    <keyword>Uber horror stories</keyword>
+    <keyword>taxidermy tragedies</keyword>
+    <keyword>breakup backlash</keyword>
+    <keyword>ghosted on deadline</keyword>
+    <keyword>heckled on stage</keyword>
+    <keyword>open relationship chaos</keyword>
+    <keyword>honeymoon disasters</keyword>
+    <keyword>infamous break-ins</keyword>
+    <keyword>lost at sea</keyword>
+    <keyword>mountain rescue fails</keyword>
+    <keyword>pet rescue gone wrong</keyword>
+    <keyword>allergic reactions</keyword>
+    <keyword>viral recipe disasters</keyword>
+    <keyword>cocktail catastrophes</keyword>
+    <keyword>cursed text threads</keyword>
+    <keyword>autocorrect disasters</keyword>
+    <keyword>wrong number confessions</keyword>
   </category>
   
   <!-- People to focus on in content -->
   <category name="key_people">
-    <keyword>{{person_keyword_1}}</keyword>
-    <keyword>{{person_keyword_2}}</keyword>
-    <keyword>{{person_keyword_3}}</keyword>
-    <keyword>{{person_keyword_4}}</keyword>
-    <keyword>{{person_keyword_5}}</keyword>
+    <keyword>Florida Man</keyword>
+    <keyword>Instagram influencers</keyword>
+    <keyword>Suburban moms</keyword>
+    <keyword>Crazed fitness enthusiasts</keyword>
+    <keyword>University students</keyword>
+    <keyword>Beauty salon owners</keyword>
+    <keyword>Social media managers</keyword>
+    <keyword>Middle-aged accountants</keyword>
+    <keyword>Urban shaman</keyword>
+    <keyword>Incel</keyword>
+    <keyword>Ugly baby</keyword>
+    <keyword>Professional Disney Mascot</keyword>
+    <keyword>Disgruntled Subway employee</keyword>
+    <keyword>Disgruntled Chuck e Cheese employee</keyword>
+    <keyword>Disgruntled KFC employee</keyword>
+    <keyword>Depressed Red Lobster employee</keyword>
+    <keyword>Tantric maseuse</keyword>
+    <keyword>landlady from hell</keyword>
+    <keyword>vapid tiktok influencer</keyword>
+    <keyword>Suburban drug dealer</keyword>
+    <keyword>Coffee shop baristas</keyword>
+    <keyword>School principals</keyword>
+    <keyword>Cult leaders</keyword>
+    <keyword>Psychic mediums</keyword>
+    <keyword>psychic mediums</keyword>
+    <keyword>Gym teacher</keyword>
+    <keyword>Camp counselor</keyword>
+    <keyword>Hospital chaplain</keyword>
+    <keyword>autistic telepath</keyword>
+    <keyword>Foreign Correspondent</keyword>
+    <keyword>Foreign student</keyword>
+    <keyword>El Salvadorian immigrant</keyword>
+    <keyword>Uber driver</keyword>
+    <keyword>Remote viewer</keyword>
+    <keyword>Dominatrix</keyword>
+    <keyword>Larper</keyword>
+    <keyword>Disgruntled bureaucrat</keyword>
+    <keyword>Cosplayer</keyword>
+    <keyword>Otaku</keyword>
+    <keyword>Dungeon Master</keyword>
+    <keyword>Hacker</keyword>
+    <keyword>Tabletop gamer</keyword>
+    <keyword>Lonely club bouncer</keyword>
+    <keyword>Stripper with PhD</keyword>
+    <keyword>Math genius</keyword>
+    <keyword>Chessmaster</keyword>
+    <keyword>Wounded Soldier</keyword>
+    <keyword>Ice cream truck driver</keyword>
+    <keyword>alternative medicine guru</keyword>
+    <keyword>conspiracy podcaster</keyword>
+    <keyword>invisibility cloak maker</keyword>
+    <keyword>dumpster diver chef</keyword>
+    <keyword>underwater welder</keyword>
+    <keyword>ghost tour guide</keyword>
+    <keyword>niche museum curator</keyword>
+    <keyword>weekend warrior</keyword>
+    <keyword>text-from-ex translator</keyword>
+    <keyword>cybersecurity ninja</keyword>
+    <keyword>backyard breeder</keyword>
+    <keyword>amateur taxidermist</keyword>
+    <keyword>miniature painter</keyword>
+    <keyword>cosmic horror writer</keyword>
+    <keyword>silent disco organizer</keyword>
+    <keyword>virtual real estate agent</keyword>
+    <keyword>drone photographer</keyword>
+    <keyword>haunted doll collector</keyword>
+    <keyword>medical marijuana activist</keyword>
+    <keyword>ASMR roleplayer</keyword>
+    <keyword>extreme couponer</keyword>
+    <keyword>seed swap coordinator</keyword>
+    <keyword>glowstick raver</keyword>
+    <keyword>tarot card reader</keyword>
+    <keyword>biohacker enthusiast</keyword>
+    <keyword>polyglot tutor</keyword>
+    <keyword>human billboard</keyword>
+    <keyword>male cheerleader</keyword>
+    <keyword>crossfit cultist</keyword>
+    <keyword>speedcubing champion</keyword>
+    <keyword>chain letter sender</keyword>
+    <keyword>fountain pen fetishist</keyword>
+    <keyword>fire dancer</keyword>
+    <keyword>pandemic hoarder</keyword>
+    <keyword>cat café barista</keyword>
+    <keyword>robot barista</keyword>
+    <keyword>hand model</keyword>
+    <keyword>foot model</keyword>
+    <keyword>phone psychic scammer</keyword>
+    <keyword>occult tattooer</keyword>
+    <keyword>extreme tightrope walker</keyword>
+    <keyword>underwater basket weaver</keyword>
+    <keyword>professional mourner</keyword>
+    <keyword>karaoke judge</keyword>
+    <keyword>bank robber apprentice</keyword>
+    <keyword>zero-waste minimalist</keyword>
+    <keyword>ghost kitchen operator</keyword>
+    <keyword>underground rapper</keyword>
+    <keyword>competitive stamp collector</keyword>
+    <keyword>professional cuddler</keyword>
+    <keyword>prank call artist</keyword>
+    <keyword>antique roadshow dealer</keyword>
+    <keyword>puppet streamer</keyword>
+    <keyword>ASMR dentist</keyword>
+    <keyword>hot sauce brewer</keyword>
+    <keyword>artisanal water sommelier</keyword>
+    <keyword>time capsule planner</keyword>
+    <keyword>festival mud wrestler</keyword>
+    <keyword>invisibility experiment subject</keyword>
+    <keyword>freelance arms dealer</keyword>
+    <keyword>speed dating coach</keyword>
+    <keyword>elevator repairman</keyword>
+    <keyword>urban myth debunker</keyword>
+    <keyword>haunted podcast host</keyword>
+    <keyword>reality dating coach</keyword>
+    <keyword>spiritual life coach</keyword>
+    <keyword>lava lamp technician</keyword>
+    <keyword>submersible pilot</keyword>
+    <keyword>hydroponic farmer</keyword>
+    <keyword>skydiving monk</keyword>
+    <keyword>medieval swordsmith</keyword>
+    <keyword>competitive duck herder</keyword>
+    <keyword>extreme hammocking enthusiast</keyword>
+    <keyword>UFO whistleblower</keyword>
+    <keyword>DIY taxidermy influencer</keyword>
+    <keyword>VR theme park designer</keyword>
+    <keyword>tax protest organizer</keyword>
+    <keyword>high-altitude beekeeper</keyword>
+    <keyword>swamp wrestler</keyword>
+    <keyword>portable sauna builder</keyword>
+    <keyword>viral dance challenge creator</keyword>
+    <keyword>extreme ironing enthusiast</keyword>
+    <keyword>foot fetish cam model</keyword>
+    <keyword>oil pipeline saboteur</keyword>
+    <keyword>submarine yodeler</keyword>
+    <keyword>solar punk architect</keyword>
+    <keyword>nut allergy chef</keyword>
+    <keyword>avalanche survivor blogger</keyword>
+    <keyword>haunted mirror collector</keyword>
+    <keyword>competitive hide-and-seek player</keyword>
+    <keyword>conspiracy theory artist</keyword>
+    <keyword>senior selfie influencer</keyword>
+    <keyword>quantum computing evangelist</keyword>
+    <keyword>deep-sea diver</keyword>
+    <keyword>amusement park critic</keyword>
+    <keyword>synthetic biology designer</keyword>
+    <keyword>robotic dog walker</keyword>
+    <keyword>extreme metal hair drummer</keyword>
+    <keyword>social experimenter</keyword>
+    <keyword>chatroom lurker</keyword>
+    <keyword>midnight caller</keyword>
+    <keyword>park bench philosopher</keyword>
+    <keyword>meme archivist</keyword>
+    <keyword>urban spelunker</keyword>
+    <keyword>quarantine artist</keyword>
+    <keyword>DIY funeral planner</keyword>
+    <keyword>serial hobbyist</keyword>
+    <keyword>extreme backyard camper</keyword>
+    <keyword>haunted doll restorer</keyword>
+    <keyword>cryptocurrency miner</keyword>
+    <keyword>deepfake maker</keyword>
+    <keyword>back-alley tattooist</keyword>
+    <keyword>underground therapist</keyword>
+    <keyword>blind date coach</keyword>
+    <keyword>extreme frugalista</keyword>
+    <keyword>DIY plastic surgeon</keyword>
+    <keyword>clown performer</keyword>
+    <keyword>mad scientist enthusiast</keyword>
+    <keyword>grassroots cult organizer</keyword>
+    <keyword>pizza delivery daredevil</keyword>
+    <keyword>backyard crypt digger</keyword>
+    <keyword>mobile escape room operator</keyword>
+    <keyword>public restroom painter</keyword>
+    <keyword>transplant organ broker</keyword>
+    <keyword>edible insect farmer</keyword>
+    <keyword>phantom cyclist</keyword>
+    <keyword>virtual lover</keyword>
+    <keyword>snail mail pen pal</keyword>
+    <keyword>haunted typewriter user</keyword>
+    <keyword>suspicious landlord</keyword>
+    <keyword>pandemic party host</keyword>
+    <keyword>extreme book hoarder</keyword>
+    <keyword>e-scooter stuntman</keyword>
+    <keyword>rogue meteorologist</keyword>
+    <keyword>backyard UFO watcher</keyword>
+    <keyword>DIY cryonics technician</keyword>
+    <keyword>highway phantom hitchhiker</keyword>
+    <keyword>zero-gravity yogi</keyword>
+    <keyword>urban beekeeper</keyword>
+    <keyword>miracle weight loss coach</keyword>
+    <keyword>underground wrestler</keyword>
+    <keyword>murder mystery dinner actor</keyword>
+    <keyword>storm chaser</keyword>
+    <keyword>ghost town real estate agent</keyword>
+    <keyword>ghetto archaeologist</keyword>
+    <keyword>time travel blogger</keyword>
+    <keyword>blind taste tester</keyword>
+    <keyword>extreme matchmaker</keyword>
+    <keyword>backcountry hermit</keyword>
+    <keyword>secret society initiate</keyword>
+    <keyword>pharmaceutical maverick</keyword>
+    <keyword>crypt keeper</keyword>
+    <keyword>virtual séance host</keyword>
+    <keyword>extreme fertilizer enthusiast</keyword>
+    <keyword>viral recipe tester</keyword>
+    <keyword>sunken treasure hunter</keyword>
+    <keyword>rogue AI ethicist</keyword>
+    <keyword>haunted elevator operator</keyword>
+    <keyword>moonlight gardener</keyword>
+    <keyword>DIY ghost hunter</keyword>
+    <keyword>underground rave promoter</keyword>
+    <keyword>perfume alchemist</keyword>
+    <keyword>extreme sauna influencer</keyword>
+    <keyword>quantum bartender</keyword>
+    <keyword>urban myth collector</keyword>
+    <keyword>haunted highway patrol</keyword>
+    <keyword>drone jockey</keyword>
+    <keyword>dark web tour guide</keyword>
+    <keyword>backyard dinosaur rancher</keyword>
+    <keyword>AI relationship coach</keyword>
+    <keyword>poison pen writer</keyword>
+    <keyword>unsanctioned street racer</keyword>
+    <keyword>subway ghost seeker</keyword>
+    <keyword>extreme ice bath enthusiast</keyword>
+    <keyword>virtual funeral director</keyword>
+    <keyword>DIY nuclear survivalist</keyword>
+    <keyword>solar eclipse chaser</keyword>
+    <keyword>DIY tattoo removal</keyword>
+    <keyword>haunted library aide</keyword>
+    <keyword>extreme penny pincher</keyword>
+    <keyword>abandoned building trespasser</keyword>
+    <keyword>urban forager</keyword>
+    <keyword>underground bakery</keyword>
+    <keyword>rogue biomedical coder</keyword>
+    <keyword>backpack grave digger</keyword>
+    <keyword>drag show performer</keyword>
+    <keyword>auto detail conspiracy theorist</keyword>
+    <keyword>deep forest hermit</keyword>
+    <keyword>moonshine chemist</keyword>
+    <keyword>rooftop botanist</keyword>
+    <keyword>haunted mirror repairer</keyword>
+    <keyword>extreme door-to-door salesman</keyword>
+    <keyword>yodeling instructor</keyword>
+    <keyword>pet cloning entrepreneur</keyword>
+    <keyword>nightmare interpreter</keyword>
+    <keyword>extreme cave dweller</keyword>
+    <keyword>zero waste zombie hunter</keyword>
+    <keyword>clandestine graffiti artist</keyword>
+     <keyword>password manager addicts</keyword>
+    <keyword>basement conspiracy theorists</keyword>
+    <keyword>acid trip survivors</keyword>
+    <keyword>ghostwriting politicians</keyword>
+    <keyword>viral video interviewees</keyword>
+    <keyword>cat whisperers</keyword>
+    <keyword>dog influencers</keyword>
+    <keyword>vsco girls</keyword>
+    <keyword>white van drivers</keyword>
+    <keyword>amateur tax lawyers</keyword>
+    <keyword>sidewalk preachers</keyword>
+    <keyword>mall cops</keyword>
+    <keyword>carnival barkers</keyword>
+    <keyword>food truck owners</keyword>
+    <keyword>silent monks</keyword>
+    <keyword>drag king personas</keyword>
+    <keyword>wedding crasher experts</keyword>
+    <keyword>weatherman mishaps</keyword>
+    <keyword>onion ring enthusiasts</keyword>
+    <keyword>pie-eating champions</keyword>
+    <keyword>message in a bottle finders</keyword>
+    <keyword>hot air balloon pilots</keyword>
+    <keyword>whale song recorders</keyword>
+    <keyword>flat earth ambassadors</keyword>
+    <keyword>face mask reviewers</keyword>
+    <keyword>crocheting cultists</keyword>
+    <keyword>bedbug exterminators</keyword>
+    <keyword>silent disco DJs</keyword>
+    <keyword>protest line painters</keyword>
+    <keyword>permaculture evangelists</keyword>
+    <keyword>teddy bear zoo curators</keyword>
+    <keyword>hoverboard stunt riders</keyword>
+    <keyword>secret menu chefs</keyword>
+    <keyword>attic architects</keyword>
+    <keyword>hoarder rehabilitation coaches</keyword>
+    <keyword>teenage prank consultants</keyword>
+    <keyword>elevator ghost hunters</keyword>
+    <keyword>haunted mirror selfie takers</keyword>
+    <keyword>minimalism influencers</keyword>
+    <keyword>maximalism collectors</keyword>
+    <keyword>horror podcast guests</keyword>
+    <keyword>exorcism documentarians</keyword>
+    <keyword>midnight organists</keyword>
+    <keyword>tarot tattoo artists</keyword>
+    <keyword>apocalypse planners</keyword>
+    <keyword>plague livestreamers</keyword>
+    <keyword>UFO whistleblowers</keyword>
+    <keyword>basement cat owners</keyword>
+    <keyword>sewer diver chefs</keyword>
+    <keyword>apocalypse re-enactors</keyword>
+    <keyword>vampire hunters</keyword>
+    <keyword>fairy tale scholars</keyword>
+    <keyword>cryptid zoologists</keyword>
+    <keyword>chemtrail activists</keyword>
+    <keyword>psychic test subjects</keyword>
+    <keyword>haunted house flippers</keyword>
+    <keyword>novelty sock collectors</keyword>
+    <keyword>extreme laundry enthusiasts</keyword>
+    <keyword>mailbox decorators</keyword>
+    <keyword>extreme yard-salers</keyword>
+    <keyword>haunted tree climbers</keyword>
+    <keyword>freeway poets</keyword>
+    <keyword>pancake day ambassadors</keyword>
+    <keyword>edible weed foragers</keyword>
+    <keyword>cinnamon challenge survivors</keyword>
+    <keyword>ghost pepper chefs</keyword>
+    <keyword>surrealist cake makers</keyword>
+    <keyword>24-hour diner regulars</keyword>
+    <keyword>foam party DJs</keyword>
+    <keyword>marathon hot dog eaters</keyword>
+    <keyword>impromptu kazoo bands</keyword>
+    <keyword>lost luggage claim agents</keyword>
+    <keyword>abandoned mall explorers</keyword>
+    <keyword>pirate re-enactors</keyword>
+    <keyword>zombie walk organizers</keyword>
+    <keyword>haunted rail enthusiasts</keyword>
+    <keyword>exoplanet dreamers</keyword>
+    <keyword>microdosing coaches</keyword>
+    <keyword>lucid dreaming instructors</keyword>
+    <keyword>haunted hotel bellhops</keyword>
+    <keyword>extreme book hoarders</keyword>
+    <keyword>e-scooter stuntmen</keyword>
+    <keyword>rogue meteorologists</keyword>
+    <keyword>backyard UFO watchers</keyword>
+    <keyword>DIY cryonics technicians</keyword>
+    <keyword>highway phantom hitchhikers</keyword>
+    <keyword>zero-gravity yogis</keyword>
+    <keyword>urban beekeepers</keyword>
+    <keyword>miracle weight loss coaches</keyword>
+    <keyword>underground wrestlers</keyword>
+    <keyword>murder mystery actors</keyword>
+    <keyword>storm chasers</keyword>
+    <keyword>ghost town realtors</keyword>
+    <keyword>time travel bloggers</keyword>
+    <keyword>blind taste testers</keyword>
+    <keyword>extreme matchmakers</keyword>
+    <keyword>backcountry hermits</keyword>
+    <keyword>secret society initiates</keyword>
+    <keyword>pharmaceutical mavericks</keyword>
+    <keyword>crypt keepers</keyword>
+    <keyword>virtual séance hosts</keyword>
+    <keyword>fertilizer enthusiasts</keyword>
+    <keyword>viral recipe testers</keyword>
+    <keyword>sunken treasure hunters</keyword>
+    <keyword>rogue AI ethicists</keyword>
+    <keyword>haunted elevator operators</keyword>
+    <keyword>moonlight gardeners</keyword>
+    <keyword>DIY ghost hunters</keyword>
+    <keyword>rave promoters</keyword>
+    <keyword>perfume alchemists</keyword>
+    <keyword>sauna influencers</keyword>
+    <keyword>quantum bartenders</keyword>
+    <keyword>urban myth collectors</keyword>
+    <keyword>drone jockeys</keyword>
+    <keyword>dark web guides</keyword>
+    <keyword>dinosaur ranchers</keyword>
+    <keyword>AI relationship coaches</keyword>
+    <keyword>poison pen writers</keyword>
+    <keyword>street racers</keyword>
+    <keyword>subway ghost seekers</keyword>
+    <keyword>ice bath enthusiasts</keyword>
+    <keyword>virtual funeral directors</keyword>
+    <keyword>nuclear survivalists</keyword>
+    <keyword>eclipse chasers</keyword>
+    <keyword>deprecated tattoo removals</keyword>
+    <keyword>haunted library aides</keyword>
+    <keyword>penny pinchers</keyword>
+    <keyword>abandoned building trespassers</keyword>
+    <keyword>urban foragers</keyword>
+
+
   </category>
   
   <!-- Organizations to focus on in content -->
   <category name="key_organizations">
-    <keyword>{{org_keyword_1}}</keyword>
-    <keyword>{{org_keyword_2}}</keyword>
-    <keyword>{{org_keyword_3}}</keyword>
-    <keyword>{{org_keyword_4}}</keyword>
-    <keyword>{{org_keyword_5}}</keyword>
+    <keyword>Tanning salons</keyword>
+    <keyword>Local gyms</keyword>
+    <keyword>College dormitories</keyword>
+    <keyword>Corporate offices</keyword>
+    <keyword>Social media companies</keyword>
+    <keyword>Suburban HOAs</keyword>
+    <keyword>Family restaurants</keyword>
+    <keyword>Community centers</keyword>
+    <keyword>Beauty parlors</keyword>
+    <keyword>Department stores</keyword>
   </category>
   
   <!-- Events or concepts to focus on -->
   <category name="key_events">
-    <keyword>{{event_keyword_1}}</keyword>
-    <keyword>{{event_keyword_2}}</keyword>
-    <keyword>{{event_keyword_3}}</keyword>
-    <keyword>{{event_keyword_4}}</keyword>
-    <keyword>{{event_keyword_5}}</keyword>
+    <keyword>Summer vacations</keyword>
+    <keyword>Office parties</keyword>
+    <keyword>Family reunions</keyword>
+    <keyword>High school reunions</keyword>
+    <keyword>First dates</keyword>
+    <keyword>Job interviews</keyword>
+    <keyword>Graduation ceremonies</keyword>
+    <keyword>Public speaking events</keyword>
+    <keyword>Wedding disasters</keyword>
+    <keyword>Viral video moments</keyword>
   </category>
   
   <!-- Used for social media hashtags -->
   <category name="hashtags">
-    <keyword>{{hashtag_1}}</keyword>
-    <keyword>{{hashtag_2}}</keyword>
-    <keyword>{{hashtag_3}}</keyword>
-    <keyword>{{hashtag_4}}</keyword>
-    <keyword>{{hashtag_5}}</keyword>
+    <keyword>CringeWorthy</keyword>
+    <keyword>SocialFail</keyword>
+    <keyword>CantLookAway</keyword>
+    <keyword>TanningDisaster</keyword>
+    <keyword>OfficeHorror</keyword>
+    <keyword>SuburbanNightmare</keyword>
+    <keyword>BeautyFail</keyword>
+    <keyword>FamilySecrets</keyword>
+    <keyword>PublicHumiliation</keyword>
+    <keyword>MundaneHorror</keyword>
   </category>
   
   <!-- Keywords for news article searches -->
   <category name="news_queries">
-    <keyword>{{news_query_1}}</keyword>
-    <keyword>{{news_query_2}}</keyword>
-    <keyword>{{news_query_3}}</keyword>
+    <keyword>bizarre local news</keyword>
+    <keyword>strange florida incidents</keyword>
+    <keyword>weird workplace stories</keyword>
+    <keyword>bizarre beauty trends</keyword>
+    <keyword>strange family discoveries</keyword>
   </category>
   
   <!-- API Search query combinations (for GNews, etc) -->
   <category name="search_queries">
-    <query name="primary">{{primary_query}}</query>
-    <query name="secondary">{{secondary_query}}</query>
-    <query name="tertiary">{{tertiary_query}}</query>
+    <query name="primary">bizarre OR strange OR weird OR unusual OR cringeworthy OR embarrassing</query>
+    <query name="secondary">florida OR suburban OR workplace OR college OR family OR beauty</query>
+    <query name="tertiary">incident OR event OR discovery OR trend OR obsession OR ritual</query>
   </category>
 </keywords>
