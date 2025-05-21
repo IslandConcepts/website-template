@@ -7,6 +7,27 @@
 .logo-icon {
   position: relative;
   transition: transform 0.3s ease, filter 0.3s ease;
+  height: 40px !important; /* Smaller logo for tighter header */
+  width: auto;
+}
+
+/* Override default header styling */
+header {
+  background-color: #000000;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+}
+
+/* Header container */
+.header-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  min-height: 50px; /* Shorter header */
+  background-color: #000000; /* Black background */
+  margin: 0;
 }
 
 /* Interlace effect overlay */
@@ -32,15 +53,55 @@
 /* Glitch Text Effect */
 .glitch-text {
   position: relative;
-  color: var(--accent-color, #fee440);
-  opacity: 0.95; /* Increase visibility of the main text */
-  text-shadow: 0 0 5px rgba(254, 228, 64, 0.5);
+  color: rgba(255, 255, 255, 0.65); /* Increased base opacity to 65% */
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.3); /* Adjusted glow to match */
   font-weight: 900;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   display: inline-block;
-  font-size: 3.5rem;
+  font-size: 6rem; /* Bigger font size */
   line-height: 1.2;
+  animation: flash-opacity 5s infinite; /* Adjusted duration to be faster */
+}
+
+/* Flash opacity animation */
+@keyframes flash-opacity {
+  0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80% {
+    color: rgba(255, 255, 255, 0.65); /* Base opacity at 65% */
+  }
+  82% {
+    color: rgba(255, 255, 255, 0.65); /* Still at base */
+  }
+  83% {
+    color: rgba(255, 255, 255, 0.8); /* Medium flash */
+  }
+  84% {
+    color: rgba(255, 255, 255, 0.65); /* Back to base */
+  }
+  86% {
+    color: rgba(255, 255, 255, 0.95); /* Higher flash */
+  }
+  87.5% {
+    color: rgba(255, 255, 255, 0.7); /* Slightly above base */
+  }
+  89% {
+    color: rgba(255, 255, 255, 1); /* Full flash */
+  }
+  89.5% {
+    color: rgba(255, 255, 255, 0.65); /* Quick drop to base */
+  }
+  91% {
+    color: rgba(255, 255, 255, 0.9); /* Another high flash */
+  }
+  93% {
+    color: rgba(255, 255, 255, 0.65); /* Back to base */
+  }
+  95% {
+    color: rgba(255, 255, 255, 0.75); /* Mild flash */
+  }
+  100% {
+    color: rgba(255, 255, 255, 0.65); /* End at base */
+  }
 }
 
 .glitch-text::before,
@@ -53,19 +114,25 @@
   height: 100%;
   background: transparent;
   clip: rect(0, 900px, 0, 0);
-  opacity: 0.9; /* Keep glitch artifacts more visible */
+  opacity: 1; /* Maximum visibility for glitch artifacts */
 }
 
 .glitch-text::before {
   left: 2px;
-  text-shadow: -2px 0 #ff0044;
+  text-shadow: 
+    -2px 0 #ff0044,
+    1px 1px #00ff00,
+    -1px -2px #ffff00;
   animation: glitch-1 1.5s infinite linear alternate-reverse;
 }
 
 .glitch-text::after {
   left: -2px;
-  text-shadow: 2px 0 #00ccff;
-  animation: glitch-2 1s infinite linear alternate-reverse;
+  text-shadow: 
+    2px 0 #00ccff,
+    -1px 1px #ff00ff,
+    1px -1px #ffcc00;
+  animation: glitch-2 1.2s infinite linear alternate-reverse;
 }
 
 /* Interlace overlay */
@@ -159,62 +226,125 @@
   0% {
     clip: rect(66px, 9999px, 98px, 0);
   }
-  5% {
+  2.5% {
     clip: rect(36px, 9999px, 23px, 0);
   }
-  10% {
+  5% {
     clip: rect(57px, 9999px, 94px, 0);
   }
-  15% {
+  7.5% {
     clip: rect(89px, 9999px, 44px, 0);
   }
-  20% {
+  10% {
     clip: rect(73px, 9999px, 61px, 0);
   }
-  25% {
+  12.5% {
     clip: rect(81px, 9999px, 77px, 0);
   }
-  30% {
+  15% {
     clip: rect(10px, 9999px, 4px, 0);
   }
-  35% {
+  17.5% {
     clip: rect(32px, 9999px, 59px, 0);
   }
-  40% {
+  20% {
     clip: rect(37px, 9999px, 56px, 0);
   }
-  45% {
+  22.5% {
     clip: rect(10px, 9999px, 8px, 0);
   }
-  50% {
+  25% {
     clip: rect(82px, 9999px, 98px, 0);
   }
-  55% {
+  27.5% {
     clip: rect(22px, 9999px, 11px, 0);
   }
-  60% {
+  30% {
     clip: rect(84px, 9999px, 8px, 0);
   }
-  65% {
+  32.5% {
     clip: rect(75px, 9999px, 57px, 0);
   }
-  70% {
+  35% {
     clip: rect(5px, 9999px, 4px, 0);
   }
-  75% {
+  37.5% {
     clip: rect(85px, 9999px, 93px, 0);
   }
-  80% {
+  40% {
     clip: rect(32px, 9999px, 1px, 0);
   }
-  85% {
+  42.5% {
     clip: rect(66px, 9999px, 93px, 0);
   }
-  90% {
+  45% {
     clip: rect(31px, 9999px, 44px, 0);
   }
-  95% {
+  47.5% {
     clip: rect(73px, 9999px, 86px, 0);
+  }
+  50% {
+    clip: rect(66px, 9999px, 98px, 0);
+  }
+  52.5% {
+    clip: rect(36px, 9999px, 23px, 0);
+  }
+  55% {
+    clip: rect(57px, 9999px, 94px, 0);
+  }
+  57.5% {
+    clip: rect(89px, 9999px, 44px, 0);
+  }
+  60% {
+    clip: rect(73px, 9999px, 61px, 0);
+  }
+  62.5% {
+    clip: rect(81px, 9999px, 77px, 0);
+  }
+  65% {
+    clip: rect(10px, 9999px, 4px, 0);
+  }
+  67.5% {
+    clip: rect(32px, 9999px, 59px, 0);
+  }
+  70% {
+    clip: rect(37px, 9999px, 56px, 0);
+  }
+  72.5% {
+    clip: rect(10px, 9999px, 8px, 0);
+  }
+  75% {
+    clip: rect(82px, 9999px, 98px, 0);
+  }
+  77.5% {
+    clip: rect(22px, 9999px, 11px, 0);
+  }
+  80% {
+    clip: rect(84px, 9999px, 8px, 0);
+  }
+  82.5% {
+    clip: rect(75px, 9999px, 57px, 0);
+  }
+  85% {
+    clip: rect(5px, 9999px, 4px, 0);
+  }
+  87.5% {
+    clip: rect(85px, 9999px, 93px, 0);
+  }
+  90% {
+    clip: rect(32px, 9999px, 1px, 0);
+  }
+  92.5% {
+    clip: rect(66px, 9999px, 93px, 0);
+  }
+  95% {
+    clip: rect(31px, 9999px, 44px, 0);
+  }
+  97.5% {
+    clip: rect(73px, 9999px, 86px, 0);
+  }
+  100% {
+    clip: rect(66px, 9999px, 98px, 0);
   }
 }
 
@@ -222,66 +352,138 @@
   0% {
     clip: rect(19px, 9999px, 45px, 0);
   }
-  5% {
+  2.5% {
     clip: rect(90px, 9999px, 6px, 0);
   }
-  10% {
+  5% {
     clip: rect(4px, 9999px, 3px, 0);
   }
-  15% {
+  7.5% {
     clip: rect(76px, 9999px, 63px, 0);
   }
-  20% {
+  10% {
     clip: rect(35px, 9999px, 50px, 0);
   }
-  25% {
+  12.5% {
     clip: rect(3px, 9999px, 3px, 0);
   }
-  30% {
+  15% {
     clip: rect(17px, 9999px, 33px, 0);
   }
-  35% {
+  17.5% {
     clip: rect(19px, 9999px, 99px, 0);
   }
-  40% {
+  20% {
     clip: rect(32px, 9999px, 91px, 0);
   }
-  45% {
+  22.5% {
     clip: rect(34px, 9999px, 8px, 0);
   }
-  50% {
+  25% {
     clip: rect(76px, 9999px, 75px, 0);
   }
-  55% {
+  27.5% {
     clip: rect(38px, 9999px, 9px, 0);
   }
-  60% {
+  30% {
     clip: rect(56px, 9999px, 98px, 0);
   }
-  65% {
+  32.5% {
     clip: rect(55px, 9999px, 76px, 0);
   }
-  70% {
+  35% {
     clip: rect(30px, 9999px, 84px, 0);
   }
-  75% {
+  37.5% {
     clip: rect(76px, 9999px, 85px, 0);
   }
-  80% {
+  40% {
     clip: rect(15px, 9999px, 57px, 0);
   }
-  85% {
+  42.5% {
     clip: rect(34px, 9999px, 17px, 0);
   }
-  90% {
+  45% {
     clip: rect(51px, 9999px, 33px, 0);
   }
-  95% {
+  47.5% {
     clip: rect(67px, 9999px, 74px, 0);
+  }
+  50% {
+    clip: rect(19px, 9999px, 45px, 0);
+  }
+  52.5% {
+    clip: rect(90px, 9999px, 6px, 0);
+  }
+  55% {
+    clip: rect(4px, 9999px, 3px, 0);
+  }
+  57.5% {
+    clip: rect(76px, 9999px, 63px, 0);
+  }
+  60% {
+    clip: rect(35px, 9999px, 50px, 0);
+  }
+  62.5% {
+    clip: rect(3px, 9999px, 3px, 0);
+  }
+  65% {
+    clip: rect(17px, 9999px, 33px, 0);
+  }
+  67.5% {
+    clip: rect(19px, 9999px, 99px, 0);
+  }
+  70% {
+    clip: rect(32px, 9999px, 91px, 0);
+  }
+  72.5% {
+    clip: rect(34px, 9999px, 8px, 0);
+  }
+  75% {
+    clip: rect(76px, 9999px, 75px, 0);
+  }
+  77.5% {
+    clip: rect(38px, 9999px, 9px, 0);
+  }
+  80% {
+    clip: rect(56px, 9999px, 98px, 0);
+  }
+  82.5% {
+    clip: rect(55px, 9999px, 76px, 0);
+  }
+  85% {
+    clip: rect(30px, 9999px, 84px, 0);
+  }
+  87.5% {
+    clip: rect(76px, 9999px, 85px, 0);
+  }
+  90% {
+    clip: rect(15px, 9999px, 57px, 0);
+  }
+  92.5% {
+    clip: rect(34px, 9999px, 17px, 0);
+  }
+  95% {
+    clip: rect(51px, 9999px, 33px, 0);
+  }
+  97.5% {
+    clip: rect(67px, 9999px, 74px, 0);
+  }
+  100% {
+    clip: rect(19px, 9999px, 45px, 0);
   }
 }
 
 .frontpage {
+  background-color: #000000;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure no gap between header and splash banner */
+main {
+  margin: 0;
+  padding: 0;
   background-color: #000000;
 }
 
@@ -297,6 +499,7 @@
 
 .first-banner {
   height: 70vh;
+  margin-top: -1px; /* Remove any gap between header and banner */
 }
 
 .second-banner,
@@ -312,15 +515,24 @@
   width: 100%;
   height: 100%;
   z-index: 1;
+  overflow: hidden;
+  position: relative;
 }
+
+/* Video effects removed for performance - will be baked into the videos later */
 
 .splash-image video,
 .splash-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: contrast(1.1) saturate(1.2);
+  /* Basic filter for a slightly enhanced look without animations */
+  filter: contrast(1.1) saturate(1.1);
 }
+
+/* Video glitch animations removed for performance */
+
+/* Flash glitch effect removed */
 
 .splash-fallback {
   position: absolute;
@@ -417,8 +629,8 @@ video[autoplay]:not([playsinline]) {
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--accent-color, #fee440);
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  color: var(--primary-color, #e64c38); /* Blood orange */
+  text-shadow: 2px 2px 8px rgba(230, 76, 56, 0.3);
   margin: 0 0 1rem 0;
   line-height: 1.1;
 }
@@ -428,23 +640,25 @@ video[autoplay]:not([playsinline]) {
   line-height: 1.5;
   max-width: 900px;
   margin: 0 auto 1.5rem;
-  color: var(--text-color, #f5f5f5);
+  color: #f5edc8; /* Yellowish off-white color */
 }
 
 .final-tagline {
-  font-size: 2.8rem;
-  font-weight: 700;
+  font-size: 4rem;
+  font-weight: 900;
   color: var(--primary-color, #e64c38);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin: 1.5rem 0 0;
+  letter-spacing: 0.1em;
+  margin: 2rem 0;
   line-height: 1.2;
+  text-align: center;
+  text-shadow: 0 0 10px rgba(230, 76, 56, 0.5);
 }
 
 .site-tagline {
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--primary-color, #e64c38);
+  color: var(--primary-color, #e64c38); /* Blood orange */
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin: 0;
@@ -516,7 +730,7 @@ video[autoplay]:not([playsinline]) {
 .disclaimer-white {
   margin-top: 0;
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(245, 237, 200, 0.7); /* Yellowish off-white with some transparency */
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
@@ -529,6 +743,12 @@ video[autoplay]:not([playsinline]) {
 }
 
 /* Mobile styles */
+/* Fourth title section - just for the final tagline */
+.fourth-title {
+  background-color: #000000;
+  padding: 3rem 1rem;
+}
+
 @media (max-width: 768px) {
   .splash-section {
     height: 50vh;
@@ -537,6 +757,16 @@ video[autoplay]:not([playsinline]) {
   
   .first-banner {
     height: 60vh;
+  }
+  
+  /* Mobile footer adjustments */
+  .footer-nav {
+    flex-wrap: wrap;
+  }
+  
+  .footer-nav a {
+    margin: 0.5rem 1rem;
+    font-size: 1rem;
   }
   
   .splash-overlay .site-title {
@@ -591,18 +821,30 @@ video[autoplay]:not([playsinline]) {
   }
   
   .final-tagline {
-    font-size: 2rem;
+    font-size: 2.5rem;
+    margin: 1.5rem 0;
   }
 }
 
 /* Header Nav Styling */
+.header-nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  width: 80%; /* Increased width to accommodate all nav items */
+  white-space: nowrap; /* Prevent text wrapping in nav items */
+}
+
 .header-nav a {
   color: var(--primary-color, #e64c38);
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  font-size: 1rem;
-  margin: 0 1rem;
+  font-size: 0.75rem; /* Even smaller font size */
+  margin: 0 1rem; /* Tighter spacing between nav items */
   transition: transform 0.2s ease;
 }
 
@@ -1045,6 +1287,52 @@ video[autoplay]:not([playsinline]) {
   background-image: url('/images/bluesky-icon.svg');
   width: 16px;
   height: 16px;
+}
+
+/* Footer Nav Styling */
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  background-color: var(--footer-bg-color, #111);
+}
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  white-space: nowrap; /* Prevent text wrapping in nav items */
+}
+
+.footer-nav a {
+  color: var(--primary-color, #e64c38);
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.85rem; /* Match header font size */
+  margin: 0 1.5rem; /* Match header spacing */
+  transition: transform 0.2s ease;
+}
+
+.footer-nav a:hover {
+  color: var(--accent-color, #fee440);
+  transform: scale(1.05);
+}
+
+.footer-socials {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.copyright {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
 }
 
 /* Mobile Nav */

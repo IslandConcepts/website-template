@@ -1,0 +1,10 @@
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+  <a href="/">Home</a>
+  {{ if ne .Section "" }}
+    / <a href="{{ .Section | absURL }}">{{ .Section | humanize | title }}</a>
+  {{ end }}
+  {{ if and (ne .Section "") (ne .Title (title (humanize .Section))) }}
+    / {{ .Title }}
+  {{ end }}
+</div>

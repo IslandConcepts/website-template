@@ -1,0 +1,21 @@
+<div class="footer-container">
+  <div class="footer-nav">
+    {{ range .Site.Params.nav }}
+      {{ if not (eq .visible false) }}
+        <a href="{{ .url }}">{{ .title }}</a>
+      {{ end }}
+    {{ end }}
+  </div>
+  
+  <div class="footer-socials">
+    {{ range .Site.Params.socials }}
+      <a href="{{ .url }}" target="_blank" rel="noopener" aria-label="{{ .name }}">
+        <img src="{{ .icon }}" alt="{{ .name }} logo" class="social-icon" />
+      </a>
+    {{ end }}
+  </div>
+</div>
+
+<div class="copyright">
+  &copy; {{ now.Format "2006" }} {{ .Site.Title }}. All content on this site is satirical and not meant to be taken seriously.
+</div>

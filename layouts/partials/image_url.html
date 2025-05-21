@@ -1,0 +1,19 @@
+{{/*
+  Image URL Processor Partial
+  
+  This partial processes image URLs to ensure they use the correct format:
+  - Converts S3 URLs to include region: 
+    from: https://cringeworthy.s3.amazonaws.com/images/...
+    to:   https://cringeworthy.s3.us-east-2.amazonaws.com/images/...
+  - Provides fallback for missing images
+*/}}
+
+{{ $url := . }}
+{{ if not $url }}
+  {{ $.Site.Params.images.defaultArticleImage }}
+{{ else }}
+  {{ if in $url "cringeworthy.s3.amazonaws.com" }}
+    {{ $url = replace $url "cringeworthy.s3.amazonaws.com" "cringeworthy.s3.us-east-2.amazonaws.com" }}
+  {{ end }}
+  {{ $url }}
+{{ end }}

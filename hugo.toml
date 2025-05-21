@@ -1,0 +1,92 @@
+baseURL = "/"
+title = "Cringeworthy"
+languageCode = "en-us"
+# No theme needed since we're using custom layouts
+
+# Enable custom CSS
+# Homepage Configuration
+[params]
+  description = "A satirical content generation platform"
+  bannerTagline = "So Bad You Wish It Weren't True"
+  banner2Heading = "Awkwardness You Can't Unsee."
+  banner3Heading = "Darkness You Can't Shake Off."
+  banner4Heading = "Get Ready to Get Weird."
+  
+  # Content Display Settings
+  tickerSections = ["shame", "lore", "recent"]
+  tickerItemCount = 10
+  previewTagSections = ["shame", "lore", "recent"]
+  previewTagCount = 2
+  showNewsTicker = true
+  featuredCount = 3
+  mediumCount = 5
+  intro = "Cringeworthy is a digital hellscape of the dark, the grotesque, and the hilariously disturbing, where viral cringe meets unspeakable horror, and humanity's most messed-up moments are remembered."
+  midContent = "We shine a harsh fluorescent light on everything society would rather pretend doesn't exist. We show you what you'd rather not know, and once you see it, you can't look away. We capture humanity's most messed-up, horrific, legendary, mysterious, weird, cringy viral moments and put them on shameless display."
+  midContent2 = "We curate the worst of the web and the real world. From blood-curdling mysteries to embarrassing moments caught on film. We're not here to comfort you; we're here to provoke, disturb, and entertain."
+  conclusion = "If it's cursed, if it's shameful, if it's so bad you wish it weren't true—then you'll find it here."
+  disclaimer = "Disclaimer: All content on this site is purely satirical and not meant to be taken seriously. <a href='/about/' class='fiction-link'>Learn more about our mission</a>"
+  
+  [params.videos]
+    banner1 = "https://cringeworthy.s3.us-east-2.amazonaws.com/video/Cringe_1.mp4"
+    banner2 = "https://cringeworthy.s3.us-east-2.amazonaws.com/video/Cringe_2.mp4"
+    banner3 = "https://cringeworthy.s3.us-east-2.amazonaws.com/video/Cringe_3.mp4"
+    banner4 = "https://cringeworthy.s3.us-east-2.amazonaws.com/video/Cringe_4.mp4"
+    
+  [params.images]
+    banner1 = "/images/cringe_1.png"
+    banner2 = "/images/cringe_2.png"
+    banner3 = "/images/cringe_3.png"
+    banner4 = "/images/cringe_4.png"
+    defaultImage = "/images/cringe_logo_2.png"
+    defaultArticleImage = "/images/cringe_logo_2.png"
+  
+  [params.branding]
+    logoPath = "/images/cringe_logo_2.png"
+    logoAlt = "Cringeworthy Logo"
+    faviconPath = "/favicon.ico"
+    mobileDisclaimer = "Satirical content only"
+    
+  # Navigation
+  [[params.nav]]
+    title = "FRESH CRINGE"
+    url = "/recent/"
+    visible = true
+  [[params.nav]]
+    title = "HALL OF SHAME"
+    url = "/shame/"
+    visible = true
+  [[params.nav]]
+    title = "DARK LORE"
+    url = "/lore/"
+    visible = true
+  [[params.nav]]
+    title = "ORIGIN STORY"
+    url = "/about/"
+    visible = true
+  [[params.nav]]
+    title = "DUSTBIN"
+    url = "/archive/"
+    visible = true
+  
+  [params.design]
+    primaryColor = "#e64c38"
+    secondaryColor = "#222222"
+    accentColor = "#fee440"
+    textColor = "#f5f5f5"
+    backgroundColor = "#121212"
+    linkColor = "#e64c38"
+    headerBackgroundColor = "#1a1a1a"
+    footerBackgroundColor = "#1a1a1a"
+    
+    [params.design.font]
+      headings = "Bebas Neue"
+      body = "Roboto"
+      monospace = "Roboto Mono"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[build]
+  writeStats = true

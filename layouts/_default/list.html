@@ -1,0 +1,43 @@
+{{ define "main" }}
+<div class="list-container">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+  
+  <!-- News Ticker (if enabled) -->
+  {{ if and (eq .Kind "section") (.Site.Params.showNewsTicker) }}
+    {{ partial "news_ticker.html" . }}
+  {{ end }}
+  
+  <div class="smaller-grid">
+    {{ range .Pages }}
+    <div class="grid-item">
+      <a href="{{ .RelPermalink }}" class="thumbnail-link">
+        <div class="thumbnail">
+          {{ $imgSrc := .Params.image | default .Site.Params.images.defaultImage }}
+          {{ $processedURL := partial "image_url.html" $imgSrc }}
+          <img src="{{ $processedURL }}" alt="{{ .Title }}">
+        </div>
+        <div class="item-content">
+          <h3 class="news-title">
+            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          </h3>
+          <div class="news-meta">
+            {{ .Date.Format "January 2, 2006" }}
+            {{ with .Params.author }} by {{ . }}{{ end }}
+          </div>
+          <div class="news-summary">
+            {{ .Params.summary | default (.Summary | truncate 120) }}
+          </div>
+          <!-- Add tags if available -->
+          {{ if .Params.tags }}
+          <div class="preview-tags-container">
+            {{ partial "preview_tags.html" . }}
+          </div>
+          {{ end }}
+        </div>
+      </a>
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

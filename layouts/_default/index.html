@@ -17,12 +17,16 @@ This is a modular homepage template where you can easily customize:
     </video>
     <!-- Fallback image for browsers that don't support video -->
     <img class="splash-fallback" src="{{ .Site.Params.images.banner1 | default "/images/banner1-fallback.jpg" }}" alt="Banner fallback image">
+    
+    <!-- Video effects removed for performance -->
   </div>
 </div>
 
 <!-- Title Section Beneath First Video -->
 <section class="title-section">
-  <h1 class="site-title">CRINGEWORTHY</h1>
+  <h1 class="glitch-title">
+    <span class="glitch-text" data-text="CRINGEWORTHY">CRINGEWORTHY</span>
+  </h1>
   <p class="site-tagline">So bad you wish it weren't true</p>
 </section>
 
@@ -33,6 +37,8 @@ This is a modular homepage template where you can easily customize:
       <source src="{{ .Site.Params.videos.banner2 | default "https://example.com/path/to/your-second-video.mp4" }}" type="video/mp4">
     </video>
     <img src="{{ .Site.Params.images.banner2 | default "/images/banner2-fallback.jpg" }}" alt="Second banner fallback image" class="splash-fallback">
+    
+    <!-- Video effects removed for performance -->
   </div>
 </div>
 
@@ -40,7 +46,7 @@ This is a modular homepage template where you can easily customize:
 <section class="title-section second-title">
   <h2 class="banner-heading">AWKWARDNESS YOU CAN'T UNSEE</h2>
   <p class="banner-description">
-    Cringeworthy is a digital hellscape of the dark, the grotesque, and the hilariously disturbing, where viral cringe meets unspeakable horror, and humanity's most messed-up moments are remembered.
+    We gather the worst of the real world and filter it through the dark subconcious of the internet. Cringeworthy is a digital hellscape of the dark, the grotesque, and the hilariously disturbing, where viral cringe meets unspeakable horror, and humanity's most messed-up moments are remembered.
   </p>
 </section>
 
@@ -51,6 +57,8 @@ This is a modular homepage template where you can easily customize:
       <source src="{{ .Site.Params.videos.banner3 | default "https://example.com/path/to/your-third-video.mp4" }}" type="video/mp4">
     </video>
     <img src="{{ .Site.Params.images.banner3 | default "/images/banner3-fallback.jpg" }}" alt="Third banner fallback image" class="splash-fallback">
+    
+    <!-- Video effects removed for performance -->
   </div>
 </div>
 
@@ -58,9 +66,28 @@ This is a modular homepage template where you can easily customize:
 <section class="title-section third-title">
   <h2 class="banner-heading">DARKNESS YOU CAN'T SHAKE OFF</h2>
   <p class="banner-description">
-    We gather the worst of the real world and filter it through the dark subconcious of the internet. From blood-curdling mysteries to embarrassing moments caught on film, from conspiracy-laden rants to real-life horror stories ripped from the headlines, we deliver content that's as addictive as it is unsettling. We're not here to comfort you; we're here to provoke, disturb, and entertain. If it's cursed, if it's shameful, if it's so bad you wish it weren't true—then it belongs here.
+    From blood-curdling mysteries to embarrassing moments caught on film, from conspiracy-laden rants to real-life horror stories ripped from the headlines, we deliver content that's as addictive as it is unsettling. We're not here to comfort you; we're here to provoke, disturb, and entertain.
   </p>
-  <p class="final-tagline">GET READY TO GET WEIRD</p>
+</section>
+
+<!-- Fourth Banner Section - Video Only Without Overlay Text (temporarily using Video 3) -->
+<div class="splash-section">
+  <div class="splash-image">
+    <video autoplay muted loop playsinline class="splash-video">
+      <source src="{{ .Site.Params.videos.banner3 | default "https://example.com/path/to/your-third-video.mp4" }}" type="video/mp4">
+    </video>
+    <img src="{{ .Site.Params.images.banner3 | default "/images/banner3-fallback.jpg" }}" alt="Fourth banner fallback image" class="splash-fallback">
+    
+    <!-- Video effects removed for performance -->
+  </div>
+</div>
+
+<!-- Fourth Title Section -->
+<section class="title-section fourth-title">
+  <h2 class="banner-heading">GET READY TO GET WEIRD</h2>
+  <p class="banner-description">
+    If it's cursed, if it's shameful, if it's so bad you wish it weren't true—you'll find it here.
+  </p>
 </section>
 
 <!-- Disclaimer Section -->

@@ -1,0 +1,47 @@
+{{ define "main" }}
+<div class="section-container">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+  
+  <!-- News Ticker (if enabled) -->
+  {{ if .Site.Params.showNewsTicker }}
+    {{ partial "news_ticker.html" . }}
+  {{ end }}
+  
+  {{ $paginator := .Paginate (where .Pages "Type" .Section) }}
+  <div class="alternating-list">
+    {{ range $paginator.Pages }}
+    <div class="alternating-item">
+      <div class="thumbnail">
+        {{ $imgSrc := .Params.image | default .Site.Params.images.defaultImage }}
+        {{ $processedURL := partial "image_url.html" $imgSrc }}
+        <a href="{{ .RelPermalink }}" class="thumbnail-link">
+          <img src="{{ $processedURL }}" alt="{{ .Title }}">
+        </a>
+      </div>
+      <div class="content">
+        <h2 class="news-title">
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        </h2>
+        <div class="news-meta">
+          {{ .Date.Format "January 2, 2006" }}
+          {{ with .Params.author }} by {{ . }}{{ end }}
+        </div>
+        <div class="news-summary">{{ .Params.summary | default .Summary }}</div>
+        <!-- Add tags if available -->
+        {{ if .Params.tags }}
+        <div class="preview-tags-container">
+          {{ partial "preview_tags.html" . }}
+        </div>
+        {{ end }}
+        <div class="read-more">
+          <a href="{{ .RelPermalink }}">Read More</a>
+        </div>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+  
+  {{ template "_internal/pagination.html" . }}
+</div>
+{{ end }}
