@@ -14,14 +14,22 @@ import requests
 import time
 import glob
 import xml.etree.ElementTree as ET
-from openai import OpenAI
 
 # Import the image URL function
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from image_urls import get_image_url_for_topic
 
-# Initialize OpenAI client using environment variable
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+# Initialize OpenAI client only if we have an API key
+has_openai = False
+try:
+    from openai import OpenAI
+    if os.environ.get("OPENAI_API_KEY"):
+        client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+        has_openai = True
+    else:
+        print("No OpenAI API key found. Using sample content only.")
+except ImportError:
+    print("OpenAI package not installed. Using sample content only.")
 
 def load_trending_topics(num_topics=15, min_score=5.0):
     """
@@ -110,58 +118,64 @@ def generate_short_title(title, retries=3, base_delay=5):
     Generates a shorter, more concise version of the headline for the ticker.
     This is a purpose-built headline that's grammatically complete but shorter.
     """
-    prompt = f"""Create a shortened version of this satirical headline for a news ticker:
+    # If OpenAI is available, use it to generate a short title
+    if has_openai:
+        prompt = f"""Create a shortened version of this satirical headline for a news ticker:
+        
+        Original headline: "{title}"
+        
+        Requirements:
+        1. Maximum 40-60 characters
+        2. Must be a complete phrase (not ending mid-thought)
+        3. CRITICAL: Preserve the punchline, irony, or satirical element that makes the headline funny
+        4. Remove unnecessary words but KEEP the humorous twist or punchline
+        5. Keep it grammatically correct
+        6. Do not use ellipses (...)
+        7. Do NOT include hashtags (like #trending)
+        8. Do NOT use double quotes within the headline
+        
+        Just return the shortened headline text with no quotation marks, no explanation.
+        """
+        
+        delay = base_delay
+        for attempt in range(retries):
+            try:
+                messages = [
+                    {"role": "system", "content": "You create concise headline versions for news tickers while preserving the humor, irony, and punchlines that make satirical headlines effective."},
+                    {"role": "user", "content": prompt}
+                ]
+                
+                response = client.chat.completions.create(
+                    model="gpt-3.5-turbo",
+                    messages=messages,
+                    max_tokens=100,
+                    temperature=0.4
+                )
+                
+                short_title = response.choices[0].message.content.strip()
+                short_title = short_title.strip('"').strip("'")
+                
+                print(f"[DEBUG] Generated short title: {short_title}")
+                return short_title
+                
+            except Exception as e:
+                print(f"[ERROR] Error generating short title (attempt {attempt+1}/{retries}): {e}")
+                if attempt < retries - 1:
+                    time.sleep(delay)
+                    delay *= 2
     
-    Original headline: "{title}"
-    
-    Requirements:
-    1. Maximum 40-60 characters
-    2. Must be a complete phrase (not ending mid-thought)
-    3. CRITICAL: Preserve the punchline, irony, or satirical element that makes the headline funny
-    4. Remove unnecessary words but KEEP the humorous twist or punchline
-    5. Keep it grammatically correct
-    6. Do not use ellipses (...)
-    7. Do NOT include hashtags (like #trending)
-    8. Do NOT use double quotes within the headline
-    
-    Just return the shortened headline text with no quotation marks, no explanation.
-    """
-    
-    delay = base_delay
-    for attempt in range(retries):
-        try:
-            messages = [
-                {"role": "system", "content": "You create concise headline versions for news tickers while preserving the humor, irony, and punchlines that make satirical headlines effective."},
-                {"role": "user", "content": prompt}
-            ]
-            
-            response = client.chat.completions.create(
-                model="gpt-3.5-turbo",
-                messages=messages,
-                max_tokens=100,
-                temperature=0.4
-            )
-            
-            short_title = response.choices[0].message.content.strip()
-            short_title = short_title.strip('"').strip("'")
-            
-            print(f"[DEBUG] Generated short title: {short_title}")
-            return short_title
-            
-        except Exception as e:
-            print(f"[ERROR] Error generating short title (attempt {attempt+1}/{retries}): {e}")
-            if attempt < retries - 1:
-                time.sleep(delay)
-                delay *= 2
-    
-    # If all attempts fail, return a truncated version of the original
+    # If OpenAI is not available or all attempts fail, return a truncated version of the original
+    print("[INFO] Using simple truncation for short title")
     words = title.split()
     if len(words) > 6:
         return " ".join(words[:6])
     return title
 
 def generate_article(section="shame", topic="cringe", override_tag=None):
-    """Generate an article using OpenAI."""
+    """Generate an article using OpenAI if available, otherwise use sample content."""
+    if not has_openai:
+        print("OpenAI not available. Using sample content instead.")
+        return generate_sample_content(section, topic, override_tag)
     
     # Get current date for frontmatter
     current_date = datetime.datetime.now().strftime("%Y-%m-%d")
@@ -881,6 +895,24 @@ def evaluate_trend_potential(trends, max_trends=5):
         
         print(f"Evaluating {len(top_trends)} trends for story potential...")
         
+        # If OpenAI is not available, simply return the top trend
+        if not has_openai:
+            print("OpenAI not available. Using top trend by score.")
+            selected_trend = top_trends[0]
+            
+            # Add some default values
+            narrative_tones = [
+                "disturbing", "horrifying", "unsettling", "revolting", 
+                "uncomfortable", "invasive", "bizarre", "creepy"
+            ]
+            selected_trend['tone'] = random.choice(narrative_tones)
+            selected_trend['angle'] = f"A story about {selected_trend['topic']} that disturbs and fascinates"
+            selected_trend['taboos'] = "social norms and expectations"
+            selected_trend['elements'] = "mundane horror, surreal aspects, intimate details"
+            
+            return selected_trend
+        
+        # OpenAI is available, proceed with evaluation
         # Create a batch prompt to evaluate all trends at once
         trend_list = "\n".join([f"{i+1}. {t['topic']} (score: {t['score']:.2f})" for i, t in enumerate(top_trends)])
         
@@ -1060,6 +1092,20 @@ def get_trend_context(topic, story_angle=None, story_tone=None):
         # Default tone if none provided
         if not story_tone:
             story_tone = "disturbing"
+            
+        # If OpenAI is not available, return a simple context
+        if not has_openai:
+            print(f"OpenAI not available. Using simple context for topic: {topic}")
+            
+            # Generate a simple context based on the topic and tone
+            scenarios = [
+                f"CANNOT-LOOK-AWAY SCENARIO: Local residents watch in horror as {topic} unfolds in their quiet suburb, revealing secrets nobody was prepared to confront.",
+                f"CANNOT-LOOK-AWAY SCENARIO: What began as an ordinary {topic} quickly spiraled into a nightmare scenario that left witnesses permanently changed.",
+                f"CANNOT-LOOK-AWAY SCENARIO: Behind closed doors, the truth about {topic} emerges with disturbing implications for everyone involved.",
+                f"CANNOT-LOOK-AWAY SCENARIO: Witnesses describe the {topic} incident as 'something you can't unsee' despite desperate attempts to forget.",
+                f"CANNOT-LOOK-AWAY SCENARIO: The {topic} phenomenon violates every expectation, leaving experts and witnesses equally disturbed."
+            ]
+            return random.choice(scenarios)
         
         # Generate a deeply unsettling narrative setup based on the topic and angle
         context_prompt = f"""

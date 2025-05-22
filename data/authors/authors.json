@@ -1,0 +1,19 @@
+{
+  "authors": [
+    {
+      "name": "CringeWorthy Staff",
+      "thumbnail": "/images/author-default.jpg",
+      "bio": "The CringeWorthy Staff team brings you the most sensational and cringeworthy stories from around the world."
+    },
+    {
+      "name": "Michael Chen",
+      "thumbnail": "/images/author-michael.jpg",
+      "bio": "Michael Chen specializes in reporting on bizarre social phenomena and uncomfortable cultural trends."
+    },
+    {
+      "name": "Sarah Johnson",
+      "thumbnail": "/images/author-sarah.jpg",
+      "bio": "Sarah Johnson digs deep into the strange and unsettling corners of everyday life to bring you stories that will make you squirm."
+    }
+  ]
+}
