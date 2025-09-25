@@ -1,9 +1,9 @@
 {
   "date": "20250925",
   "generation": {
-    "started_at": "2025-09-25T15:25:14.695273",
-    "completed_at": "2025-09-25T15:34:27.649978",
-    "duration_seconds": 552.954705,
+    "started_at": "2025-09-25T17:22:48.826171",
+    "completed_at": "2025-09-25T17:32:00.468934",
+    "duration_seconds": 551.642763,
     "initial_pool_size": 12,
     "unique_tweets_generated": 0,
     "duplicates_filtered": 36,
