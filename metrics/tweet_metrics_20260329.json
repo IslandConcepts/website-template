@@ -1,9 +1,9 @@
 {
   "date": "20260329",
   "generation": {
-    "started_at": "2026-03-29T11:26:29.881835",
-    "completed_at": "2026-03-29T11:35:39.899690",
-    "duration_seconds": 550.017855,
+    "started_at": "2026-03-29T13:36:59.931117",
+    "completed_at": "2026-03-29T13:46:09.401709",
+    "duration_seconds": 549.470592,
     "initial_pool_size": 12,
     "unique_tweets_generated": 0,
     "duplicates_filtered": 36,
